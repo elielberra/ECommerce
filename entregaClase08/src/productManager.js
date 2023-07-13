@@ -41,8 +41,6 @@ class ProductManager {
       console.log("Retrieving the list of products");
       const data = await fs.readFile(this.filepath, "utf-8");
       const products = JSON.parse(data);
-      // console.log("The products are:");
-      // products.forEach((product) => console.log(product));
       return products;
     } catch (error) {
       console.error("Error while trying to get the products:\n", error);
@@ -144,9 +142,9 @@ class ProductManager {
         break;
       }
     }
-    if (! matchingIdFound) {
-        const errorMessage = `No matching product was found with the id ${id}`;
-        console.log(errorMessage);
+    if (!matchingIdFound) {
+      const errorMessage = `No matching product was found with the id ${id}`;
+      console.log(errorMessage);
     }
     await this.writeProducts(products);
   }

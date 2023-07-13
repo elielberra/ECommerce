@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
     res.send(product);
   } else {
     res.status(404);
-    res.send(`The product with the id ${id} was not found`);
+    res.send(`The product with the id ${id} was not found.`);
   }
 });
 
@@ -41,17 +41,36 @@ router.put("/:id", async (req, res) => {
   const id = parseInt(stringId);
   try {
     const matchingProduct = await productManager.getProductById(id);
-    console.log("MATCHING PRODUCT", matchingProduct);
     if (!matchingProduct) {
-      res.status(404).send(`No matching product was found with the id ${id}`);
+      res.status(404).send(`No matching product was found with the id ${id}. It can't be modified.`);
       return;
     }
     await productManager.updateProduct(id, product);
-    res.status(200).send("The product was updated successfully");
+    res.status(200).send('The product was updated successfully.');
   } catch (error) {
-    res.status(400).send({
+    res.status(500).send({
       message:
-        "There was been an error with the server. Please try again later",
+        'There was been an error with the server. Please try again later.',
+      exception: error.stack,
+    });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id: stringId } = req.params;
+  const id = parseInt(stringId);
+  try {
+    const matchingProduct = await productManager.getProductById(id);
+    if (!matchingProduct) {
+      res.status(404).send(`No matching product was found with the id ${id}. It can't be deleted.`);
+      return;
+    }
+    await productManager.deleteProduct(id);
+    res.status(200).send('The product was deleted successfully.');
+  } catch (error) {
+    res.status(500).send({
+      message:
+        'There was been an error with the server. Please try again later.',
       exception: error.stack,
     });
   }

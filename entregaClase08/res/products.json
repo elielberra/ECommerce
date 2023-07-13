@@ -273,38 +273,5 @@
     "stock": 100,
     "category": "toys",
     "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Board_game_patent.jpg/330px-Board_game_patent.jpg"
-  },
-  {
-    "id": 26,
-    "title": "Keyboard",
-    "description": "Keyboard: Input device for typing",
-    "code": "K8E7Y3",
-    "price": 50,
-    "status": true,
-    "stock": 100,
-    "category": "electronics",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Computer_keyboard_%28black%29.jpg/330px-Computer_keyboard_%28black%29.jpg"
-  },
-  {
-    "id": 27,
-    "title": "Ebook Reader",
-    "description": "Ebook Reader: Portable device for reading digital books",
-    "code": "E3R9D5",
-    "price": 120,
-    "status": true,
-    "stock": 80,
-    "category": "electronics",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Kindle_8th_generation.jpg/330px-Kindle_8th_generation.jpg"
-  },
-  {
-    "id": 28,
-    "title": "Bösendorfer Piano",
-    "description": "Piano: Musical instrument with keys",
-    "code": "P5I9A1",
-    "price": 5000,
-    "status": true,
-    "stock": 10,
-    "category": "musical instruments",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Grand_piano_Yamaha_C3.jpg/330px-Grand_piano_Yamaha_C3.jpg"
   }
 ]
