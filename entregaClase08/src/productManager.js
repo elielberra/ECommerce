@@ -131,22 +131,17 @@ class ProductManager {
 
   async updateProduct(id, fieldsToUpdate) {
     const products = await this.getProducts();
-    const matchingIdFound = false;
     for (const product of products) {
       if (product.id == id) {
         Object.entries(fieldsToUpdate).forEach(
           ([prop, value]) => (product[prop] = value)
         );
         console.log("Updated product: ", JSON.stringify(product));
-        const matchingIdFound = true;
-        break;
+        await this.writeProducts(products);
+        return product;
       }
     }
-    if (!matchingIdFound) {
-      const errorMessage = `No matching product was found with the id ${id}`;
-      console.log(errorMessage);
-    }
-    await this.writeProducts(products);
+    console.log(`No matching product was found with the id ${id}`);
   }
 
   async deleteProduct(id) {

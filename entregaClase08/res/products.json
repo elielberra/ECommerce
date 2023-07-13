@@ -265,13 +265,13 @@
   },
   {
     "id": 25,
-    "title": "Board Game",
-    "description": "Board Game: Fun for the whole family",
-    "code": "B4G7M2",
-    "price": 30,
+    "title": "Bsendorfer Piano",
+    "description": "Piano: Musical instrument with keys",
+    "code": "P5I9A1",
+    "price": 5000,
     "status": true,
-    "stock": 100,
-    "category": "toys",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Board_game_patent.jpg/330px-Board_game_patent.jpg"
+    "stock": 10,
+    "category": "musical instruments",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Grand_piano_Yamaha_C3.jpg/330px-Grand_piano_Yamaha_C3.jpg"
   }
 ]
