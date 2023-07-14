@@ -262,16 +262,5 @@
     "stock": 150,
     "category": "fitness",
     "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Jumprope2.jpg/330px-Jumprope2.jpg"
-  },
-  {
-    "id": 25,
-    "title": "Bsendorfer Piano",
-    "description": "Piano: Musical instrument with keys",
-    "code": "P5I9A1",
-    "price": 5000,
-    "status": true,
-    "stock": 10,
-    "category": "musical instruments",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Grand_piano_Yamaha_C3.jpg/330px-Grand_piano_Yamaha_C3.jpg"
   }
 ]

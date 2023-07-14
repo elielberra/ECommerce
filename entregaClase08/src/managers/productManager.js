@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const pathHandler = require("path");
 const currentPath = __dirname;
-const defaultPath = pathHandler.join(currentPath, "..", "res");
+const defaultPath = pathHandler.join(currentPath, "..", "..", "res");
 
 class ProductManager {
   constructor(path = defaultPath, filename = "products.json") {
@@ -76,7 +76,7 @@ class ProductManager {
     for (const mandatoryField of mandatoryFields) {
       if (!(mandatoryField in product)) {
         throw new Error(
-          `Please insert the mandatory field "${mandatoryField}" for creating a product`
+          `Please insert the mandatory field '${mandatoryField}' for creating a product`
         );
       }
     }
