@@ -8,7 +8,8 @@
     "status": true,
     "stock": 125,
     "category": "home appliances",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Breville.jpg/330px-Breville.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Breville.jpg/330px-Breville.jpg",
+    "keywords": ["Toaster", "Bread"]
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "status": true,
     "stock": 50,
     "category": "home appliances",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Automatic_drip_coffee_maker.jpg/330px-Automatic_drip_coffee_maker.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Automatic_drip_coffee_maker.jpg/330px-Automatic_drip_coffee_maker.jpg",
+    "keywords": ["Coffee Maker", "Coffee"]
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "status": true,
     "stock": 80,
     "category": "home appliances",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Kitchen_Blender.png/330px-Kitchen_Blender.png"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Kitchen_Blender.png/330px-Kitchen_Blender.png",
+    "keywords": ["Blender", "Blend"]
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "status": true,
     "stock": 100,
     "category": "beauty",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2013-05-02_13-51-59_brandhaardroger.JPG/330px-2013-05-02_13-51-59_brandhaardroger.JPG"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2013-05-02_13-51-59_brandhaardroger.JPG/330px-2013-05-02_13-51-59_brandhaardroger.JPG",
+    "keywords": ["Hair Dryer", "Hair"]
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "status": true,
     "stock": 150,
     "category": "beauty",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Toothbrush_Head_001.jpg/330px-Toothbrush_Head_001.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Toothbrush_Head_001.jpg/330px-Toothbrush_Head_001.jpg",
+    "keywords": ["Toothbrush", "Teeth"]
   },
   {
     "id": 6,
@@ -63,7 +68,8 @@
     "status": true,
     "stock": 75,
     "category": "electronics",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Bluetooth_Speaker_Icon.png/330px-Bluetooth_Speaker_Icon.png"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Bluetooth_Speaker_Icon.png/330px-Bluetooth_Speaker_Icon.png",
+    "keywords": ["Speaker", "Music"]
   },
   {
     "id": 7,
@@ -74,7 +80,8 @@
     "status": true,
     "stock": 40,
     "category": "electronics",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Samsung_Galaxy_Watch_3_-_Bluetooth_%28Mystic_Silver%2C_Mystic_Bronze%2C_Mystic_Black%2C_Titanium_Black%29.png/330px-Samsung_Galaxy_Watch_3_-_Bluetooth_%28Mystic_Silver%2C_Mystic_Bronze%2C_Mystic_Black%2C_Titanium_Black%29.png"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Samsung_Galaxy_Watch_3_-_Bluetooth_%28Mystic_Silver%2C_Mystic_Bronze%2C_Mystic_Black%2C_Titanium_Black%29.png/330px-Samsung_Galaxy_Watch_3_-_Bluetooth_%28Mystic_Silver%2C_Mystic_Bronze%2C_Mystic_Black%2C_Titanium_Black%29.png",
+    "keywords": ["Smartwatch", "Connected"]
   },
   {
     "id": 8,
@@ -85,7 +92,8 @@
     "status": true,
     "stock": 20,
     "category": "electronics",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Laptop_image.jpg/330px-Laptop_image.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Laptop_image.jpg/330px-Laptop_image.jpg",
+    "keywords": ["Laptop", "Portable"]
   },
   {
     "id": 9,
@@ -96,7 +104,8 @@
     "status": true,
     "stock": 200,
     "category": "electronics",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Wireless_mouse_icon.png/330px-Wireless_mouse_icon.png"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Wireless_mouse_icon.png/330px-Wireless_mouse_icon.png",
+    "keywords": ["Mouse", "Navigate"]
   },
   {
     "id": 10,
@@ -107,7 +116,8 @@
     "status": true,
     "stock": 60,
     "category": "fashion",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Sneakers_Issue.jpg/330px-Sneakers_Issue.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Sneakers_Issue.jpg/330px-Sneakers_Issue.jpg",
+    "keywords": ["Sneakers", "Athletic"]
   },
   {
     "id": 11,
@@ -118,7 +128,8 @@
     "status": true,
     "stock": 30,
     "category": "fashion",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Montre_PO02.jpg/330px-Montre_PO02.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Montre_PO02.jpg/330px-Montre_PO02.jpg",
+    "keywords": ["Watch", "Stylish"]
   },
   {
     "id": 12,
@@ -129,7 +140,8 @@
     "status": true,
     "stock": 250,
     "category": "fashion",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Basic_T-shirt.jpg/330px-Basic_T-shirt.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Basic_T-shirt.jpg/330px-Basic_T-shirt.jpg",
+    "keywords": ["T-Shirt", "Casual"]
   },
   {
     "id": 13,
@@ -140,7 +152,8 @@
     "status": true,
     "stock": 100,
     "category": "accessories",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Modern_backpack.jpg/330px-Modern_backpack.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Modern_backpack.jpg/330px-Modern_backpack.jpg",
+    "keywords": ["Backpack", "Essentials"]
   },
   {
     "id": 14,
@@ -151,7 +164,8 @@
     "status": true,
     "stock": 80,
     "category": "accessories",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sunglasses_for_sale_in_Sao_Paulo.jpg/330px-Sunglasses_for_sale_in_Sao_Paulo.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sunglasses_for_sale_in_Sao_Paulo.jpg/330px-Sunglasses_for_sale_in_Sao_Paulo.jpg",
+    "keywords": ["Sunglasses", "Eyes"]
   },
   {
     "id": 15,
@@ -162,7 +176,8 @@
     "status": true,
     "stock": 150,
     "category": "accessories",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Wallet.JPG/330px-Wallet.JPG"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Wallet.JPG/330px-Wallet.JPG",
+    "keywords": ["Wallet", "Money"]
   },
   {
     "id": 16,
@@ -173,7 +188,8 @@
     "status": true,
     "stock": 300,
     "category": "art supplies",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Pencil,_eraser_and_sharpener_%28set%29.jpg/330px-Pencil,_eraser_and_sharpener_%28set%29.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Pencil,_eraser_and_sharpener_%28set%29.jpg/330px-Pencil,_eraser_and_sharpener_%28set%29.jpg",
+    "keywords": ["Pencil", "Drawing"]
   },
   {
     "id": 17,
@@ -184,7 +200,8 @@
     "status": true,
     "stock": 100,
     "category": "art supplies",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Paintbox.jpg/330px-Paintbox.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Paintbox.jpg/330px-Paintbox.jpg",
+    "keywords": ["Watercolor", "Painting"]
   },
   {
     "id": 18,
@@ -195,7 +212,8 @@
     "status": true,
     "stock": 200,
     "category": "art supplies",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Wikipedia_mini_globe_hand-painted_in_canvas.jpg/330px-Wikipedia_mini_globe_hand-painted_in_canvas.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Wikipedia_mini_globe_hand-painted_in_canvas.jpg/330px-Wikipedia_mini_globe_hand-painted_in_canvas.jpg",
+    "keywords": ["Canvas", "Painting"]
   },
   {
     "id": 19,
@@ -206,7 +224,8 @@
     "status": true,
     "stock": 50,
     "category": "kitchen",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pots_and_pans.jpg/330px-Pots_and_pans.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pots_and_pans.jpg/330px-Pots_and_pans.jpg",
+    "keywords": ["Cookware", "Kitchen"]
   },
   {
     "id": 20,
@@ -217,7 +236,8 @@
     "status": true,
     "stock": 80,
     "category": "kitchen",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cutlery_set_on_table.jpg/330px-Cutlery_set_on_table.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cutlery_set_on_table.jpg/330px-Cutlery_set_on_table.jpg",
+    "keywords": ["Cutlery", "Kitchen"]
   },
   {
     "id": 21,
@@ -228,7 +248,8 @@
     "status": true,
     "stock": 40,
     "category": "kitchen",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Food_processor.jpg/330px-Food_processor.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Food_processor.jpg/330px-Food_processor.jpg",
+    "keywords": ["Food Processor", "Prepares"]
   },
   {
     "id": 22,
@@ -239,7 +260,8 @@
     "status": true,
     "stock": 60,
     "category": "fitness",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Dumbbell.jpg/330px-Dumbbell.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Dumbbell.jpg/330px-Dumbbell.jpg",
+    "keywords": ["Dumbbell", "Weights"]
   },
   {
     "id": 23,
@@ -250,7 +272,8 @@
     "status": true,
     "stock": 120,
     "category": "fitness",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Yoga_mat.jpg/330px-Yoga_mat.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Yoga_mat.jpg/330px-Yoga_mat.jpg",
+    "keywords": ["Yoga Mat", "Cushioned"]
   },
   {
     "id": 24,
@@ -261,6 +284,7 @@
     "status": true,
     "stock": 150,
     "category": "fitness",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Jumprope2.jpg/330px-Jumprope2.jpg"
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Jumprope2.jpg/330px-Jumprope2.jpg",
+    "keywords": ["Jump Rope", "Cardio"]
   }
 ]

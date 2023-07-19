@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const CartsManager = require("../../managers/cartsManager");
+const CartsManager = require("../../managers/cartManager");
 
-const cartsManager = new CartsManager();
+const cartManager = new CartsManager();
 const router = Router();
 
 router.get("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
-  const cart = await cartsManager.getCartById(id);
+  const cart = await cartManager.getCartById(id);
   if (cart) {
     res.send(cart);
   } else {
@@ -17,7 +17,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const newCart = await cartsManager.addCart();
+    const newCart = await cartManager.addCart();
     res
       .status(200)
       .send(
@@ -36,7 +36,7 @@ router.use("/:cid/product/:pid", async (req, res) => {
   console.log("INSIDE ADD CID PID");
   const cartId = parseInt(req.params.cid);
   const productId = parseInt(req.params.pid);
-  const updatedCart = await cartsManager.addProductToCart(cartId, productId);
+  const updatedCart = await cartManager.addProductToCart(cartId, productId);
   if (updatedCart) {
     res
       .status(200)

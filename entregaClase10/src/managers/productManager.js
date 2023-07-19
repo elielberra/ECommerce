@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const pathHandler = require("path");
 const currentPath = __dirname;
-const defaultPath = pathHandler.join(currentPath, "..", "..", "res");
+const defaultPath = pathHandler.join(currentPath, "..", "..", "data");
 
 class ProductManager {
   constructor(path = defaultPath, filename = "products.json") {
@@ -41,6 +41,8 @@ class ProductManager {
       console.log("Retrieving the list of products");
       const data = await fs.readFile(this.filepath, "utf-8");
       const products = JSON.parse(data);
+      const productsTitles = products.map(product => product.title).join(', ');
+      console.log(`The products are: ${productsTitles}`)
       return products;
     } catch (error) {
       console.error("Error while trying to get the products:\n", error);
@@ -60,6 +62,17 @@ class ProductManager {
     } else {
       console.error(`No product was found with the id ${id}`);
     }
+  }
+
+  getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  async getRandomProduct(id) {
+    const products = await this.getProducts();
+    const randomId = await this.getRandomNumber(1, products.length - 1);
+    const randomProduct = await this.getProductById(randomId)
+    return randomProduct
   }
 
   validateReqFields(product) {
@@ -115,6 +128,7 @@ class ProductManager {
     const newId = products[products.length - 1]?.id + 1 || 0;
     const newProduct = {
       id: newId,
+      status: true,
       ...product,
     };
     try {
@@ -124,8 +138,10 @@ class ProductManager {
       console.log(error.message);
       throw error;
     }
+    console.log("A new product will be added. The new product is:\n", newProduct)
     products.push(newProduct);
     await this.writeProducts(products);
+    console.log("The product has been successfully saved on the Database")
     return newProduct;
   }
 

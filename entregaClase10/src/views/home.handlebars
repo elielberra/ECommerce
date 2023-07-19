@@ -1,0 +1,32 @@
+<div class="uk-width-1-1 uk-align-center uk-grid">
+  <button class="uk-button" onclick="refreshPromo()">Get a new discount!</button>
+  <div id="discount-banner" class="uk-card uk-card-default uk-width-1-1">
+    <div class="uk-card-body uk-flex">
+      <span id="title"></span>
+      <span class="uk-badge" id="sale"></span>
+    </div>
+  </div>
+</div>
+<div id="products" class="uk-child-width-1-4@m uk-grid">
+  {{#each products}}
+    <div>
+      <div class="uk-card uk-card-default">
+        <div class="uk-card-media-top">
+          <img alt="foto producto" />
+        </div>
+        <div class="uk-card-body">
+          <h3 class="uk-card-title">{{this.title}}</h3>
+          <h5>u$D {{this.price}}</h5>
+          {{#each this.keywords}}
+            <span class="uk-badge">{{this}}</span>
+          {{/each}}
+          <p>{{this.description}}</p>
+          <button
+            onclick="addToCart({{this.id}})"
+            class="uk-button uk-button-secondary uk-button-small"
+          >Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

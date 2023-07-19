@@ -29,6 +29,8 @@ router.post("/", async (req, res) => {
   const { body: product } = req;
   try {
     const newProduct = await productManager.addProduct(product);
+    // Send the signal on the socket that a new product has been added
+    req.socket.emit("productAdded", newProduct)
     res.status(201).send(newProduct);
   } catch (error) {
     res.status(400).send(error.message);

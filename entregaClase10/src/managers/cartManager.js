@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const pathHandler = require("path");
 const currentPath = __dirname;
-const defaultPath = pathHandler.join(currentPath, "..", "..", "res");
+const defaultPath = pathHandler.join(currentPath, "..", "..", "data");
 const ProductManager = require("./productManager");
 
 const productManager = new ProductManager();
@@ -127,10 +127,10 @@ class CartsManager {
         await this.writeCarts(carts);
         return cart;
       } else {
-        console.log(`No matching product was found with the ID ${productId}`);
+        console.error(`No matching product was found with the ID ${productId}`);
       }
     } else {
-      console.log(`No matching cart was found with the ID ${cartId}`);
+      console.error(`No matching cart was found with the ID ${cartId}`);
     }
   }
 }
