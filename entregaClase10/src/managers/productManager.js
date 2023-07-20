@@ -64,17 +64,12 @@ class ProductManager {
     }
   }
 
-  getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  async getRandomProduct(id) {
+  async getRandomProduct() {
     const products = await this.getProducts();
     const productIds = products.map(product => product.id)
+    // Retrieve a random element of the array of the products IDs
     const randomIndex = Math.floor(Math.random() * productIds.length);
-    console.log("RANDOM INDEX", randomIndex)
     const randomProduct = products[randomIndex]
-    console.log("RANDOM PRODUCT", randomProduct)
     return randomProduct
   }
 

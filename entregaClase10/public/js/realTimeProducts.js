@@ -22,8 +22,7 @@ socket.on("productAdded", (product) => {
   const newProduct = document.createElement("div");
   let productKeywords = "";
   product.keywords.forEach(
-    (keyword) =>
-      (productKeywords += `<span class=\"uk-badge\">${keyword}</span>`)
+    (keyword) => (productKeywords += `<span class="uk-badge">${keyword}</span>`)
   );
   newProduct.innerHTML = `<div id="product-${product.id}">
                                 <div class="uk-card uk-card-default">
@@ -40,13 +39,13 @@ socket.on("productAdded", (product) => {
                                     </div>
                                 </div>
                             </div>`;
-  // The UI will be updated and the new product will be inrserted on top of all the other product
+  // The UI will be updated and the new product will be inrserted on the UI on top of the products section
   parentElement.prepend(newProduct);
-  console.log("Deleting a new prodct from the Web Socket");
 });
 
 socket.on("productDeleted", (idToDelete) => {
-  // Remove the element of the product that was deleted from the UI
+  console.log("Deleting a new prodct from the Web Socket");
+  // Remove the product that was deleted from the UI
   const productToDelete = document.getElementById(`product-${idToDelete}`);
   productToDelete.remove();
 });
