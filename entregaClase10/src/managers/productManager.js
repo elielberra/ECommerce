@@ -70,8 +70,11 @@ class ProductManager {
 
   async getRandomProduct(id) {
     const products = await this.getProducts();
-    const randomId = await this.getRandomNumber(1, products.length - 1);
-    const randomProduct = await this.getProductById(randomId)
+    const productIds = products.map(product => product.id)
+    const randomIndex = Math.floor(Math.random() * productIds.length);
+    console.log("RANDOM INDEX", randomIndex)
+    const randomProduct = products[randomIndex]
+    console.log("RANDOM PRODUCT", randomProduct)
     return randomProduct
   }
 
