@@ -76,6 +76,8 @@ router.delete("/:id", async (req, res) => {
       return;
     }
     await productManager.deleteProduct(id);
+    // Send the signal on the socket that a new product has been added
+    req.socket.emit("productDeleted", id)
     res.status(200).send("The product was deleted successfully.");
   } catch (error) {
     res.status(500).send({

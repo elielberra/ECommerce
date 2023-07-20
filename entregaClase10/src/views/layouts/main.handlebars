@@ -16,8 +16,9 @@
       href="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css"
       type="text/css"
     />
-    {{#if style}}
-      <link rel="stylesheet" href="/static/css/{{style}}.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+    {{#if styleFilename}}
+      <link rel="stylesheet" href="/static/css/{{styleFilename}}.css" type="text/css" />
     {{/if}}
   </head>
   <body>

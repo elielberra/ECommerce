@@ -13,7 +13,8 @@ router.get("/", async (req, res) => {
       ...req.user,
       isAdmin: isAdminBoolean,
     },
-    jsFilename: "home"
+    jsFilename: "home",
+    styleFilename: "home"
   });
 });
 

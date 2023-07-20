@@ -34,7 +34,7 @@
 </div>
 <div id="products" class="uk-child-width-1-4@m" uk-grid>
   {{#each products}}
-    <div>
+    <div id="product-{{this.id}}">
       <div class="uk-card uk-card-default">
         <div class="uk-card-media-top">
           <img alt="Product picture" />
@@ -46,6 +46,7 @@
             <span class="uk-badge">{{this}}</span>
           {{/each}}
           <p>{{this.description}}</p>
+          <button onclick="deleteProduct(this)" id="delete-product-{{this.id}}" class="deletion-button">Delete Product</button>
         </div>
       </div>
     </div>

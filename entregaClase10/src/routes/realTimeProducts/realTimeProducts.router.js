@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
       isAdmin: isAdminBoolean,
     },
     jsFilename: "realTimeProducts",
-    style: "realTimeProducts"
+    styleFilename: "realTimeProducts"
   });
 });
 
