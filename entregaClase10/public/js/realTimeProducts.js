@@ -35,7 +35,7 @@ socket.on("productAdded", (product) => {
                                         <h5>u$D ${product.price}</h5>
                                         ${productKeywords}
                                         <p>${product.description}</p>
-                                        <button onclick="deleteProduct(this)" id="delete-product-${product.id}
+                                        <button onclick="deleteProduct(this)" id="delete-product-${product.id}"
                                         class="deletion-button">Delete Product</button>
                                     </div>
                                 </div>

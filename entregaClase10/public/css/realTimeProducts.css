@@ -77,3 +77,19 @@ button.deletion-button {
 button.deletion-button:hover {
   background-color: #c82333;
 }
+
+.uk-flex {
+  display: flex;
+}
+
+.uk-flex-wrap {
+  flex-wrap: nowrap;
+}
+
+.uk-width-1-2 {
+  width: 75%;
+}
+
+.uk-width-1-1 {
+  width: 100%;
+}
