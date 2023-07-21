@@ -1,84 +1,119 @@
-body,
-h1,
-form {
-  margin: 0;
-  padding: 0;
-}
 
-body {
+#page-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-form {
-  background-color: #fff;
-  border-radius: 8px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+}
+
+/* Create Product Form Styles */
+
+#create-product {
+  position: absolute;
+  left: 100;
+  width: 35%;
+  padding: 20px;
+  border: 1px solid #005cbf; /* Blue border for the create product form */
+  background-color: #fff; /* White background for the create product form */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 900px;
+}
+
+#create-product form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#create-product label {
   width: 100%;
+  margin-bottom: 5px;
+  color: #005cbf; /* Blue label text color */
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-input,
-textarea,
-select {
+#create-product input,
+#create-product textarea,
+#create-product select {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc; /* Light gray border for form inputs */
+  border-radius: 5px;
 }
 
-input[type="checkbox"] {
-  margin-top: 8px;
-  margin-bottom: 16px;
-}
-
-input[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
+#create-product input[type="submit"] {
+  background-color: #005cbf; /* Blue button background color */
+  color: #fff; /* White button text color */
   border: none;
-  border-radius: 4px;
-  padding: 10px 16px;
+  padding: 10px 15px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-input[type="submit"]:hover {
-  background-color: #0056b3;
+#create-product input[type="submit"]:hover {
+  background-color: #0077cc; /* Darker blue button background color on hover */
 }
 
 .required {
-  color: red;
-  margin-left: 4px;
+  color: #ff0000; /* Red asterisk color for required fields */
 }
 
-button.deletion-button {
-  background-color: #dc3545;
-  color: #fff;
+/* Products List Styles */
+
+#products {
+  width: 50%;
+  position: absolute;
+  right: 100;
+}
+
+#products > div {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #005cbf; /* Blue border for product items */
+  background-color: #fff; /* White background color for product items */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-picture img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product-title {
+  margin: 0;
+  color: #005cbf; /* Blue product title color */
+}
+
+.product-price {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #0077cc; /* Blue product price color */
+}
+
+.uk-badge {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #e6f3ff; /* Lighter blue keyword background color */
+  color: #005cbf; /* Blue keyword text color */
+}
+
+.product-description {
+  margin: 10px 0;
+}
+
+.deletion-button {
+  background-color: #005cbf; /* Blue button background color */
+  color: #fff; /* White button text color */
   border: none;
-  border-radius: 4px;
-  padding: 10px 16px;
+  padding: 10px 15px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-button.deletion-button:hover {
-  background-color: #c82333;
+.deletion-button:hover {
+  background-color: #0077cc; /* Darker blue button background color on hover */
 }
-
-.uk-flex {
-  display: flex;
-}
-

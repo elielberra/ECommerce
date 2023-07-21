@@ -1,5 +1,5 @@
-<div class="uk-flex uk-flex-wrap">
-  <div id="create-product" class="uk-width-1-2">
+<div id="page-container">
+  <div id="create-product">
     <form id="productForm" onsubmit="handleFormSubmission(event)">
       <label for="title">Title<span class="required">*</span>:</label>
       <input type="text" id="title" name="title" required /><br />
@@ -34,27 +34,25 @@
       <input type="submit" value="Create Product" />
     </form>
   </div>
-  <div id="products" class="uk-child-width-1-4 uk-width-1-2 uk-grid">
+  <div id="products">
     {{#each products}}
       <div id="product-{{this.id}}">
-        <div class="uk-card uk-card-default">
-          <div class="uk-card-media-top">
+          <div class="product-picture">
             <img alt="Product picture" />
           </div>
-          <div class="uk-card-body">
-            <h3 class="uk-card-title">{{this.title}}</h3>
-            <h5>u$D {{this.price}}</h5>
+          <div class="product-body">
+            <h3 class="product-title">{{this.title}}</h3>
+            <h5 class="product-price">u$D {{this.price}}</h5>
             {{#each this.keywords}}
-              <span class="uk-badge">{{this}}</span>
+              <span class="product-keywords">{{this}}</span>
             {{/each}}
-            <p>{{this.description}}</p>
+            <p class="product-description">{{this.description}}</p>
             <button
               onclick="deleteProduct(this)"
               id="delete-product-{{this.id}}"
               class="deletion-button"
             >Delete Product</button>
           </div>
-        </div>
       </div>
     {{/each}}
   </div>
