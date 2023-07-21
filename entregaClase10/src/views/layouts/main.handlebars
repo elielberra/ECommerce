@@ -18,53 +18,50 @@
     />
     <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
     {{#if styleFilename}}
-      <link rel="stylesheet" href="/static/css/{{styleFilename}}.css" type="text/css" />
+      <link
+        rel="stylesheet"
+        href="/static/css/{{styleFilename}}.css"
+        type="text/css"
+      />
     {{/if}}
   </head>
   <body>
-    <div class="uk-container uk-width-1-1 uk-padding-remove uk-margin-remove">
-      <nav id="navbar" class="uk-navbar-container" uk-navbar>
-        <div class="uk-navbar-left">
-          <ul class="uk-navbar-nav">
-            <li class="uk-active">
-              <a href="/">Home</a>
-            </li>
+    <nav id="navbar">
+      <div class="navbar-left">
+        <ul class="navbar-list">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/realtimeproducts">Real Time Products</a>
+          </li>
+          <li>
+            <a href="#">Cart<span
+                id="cart-badge"
+                class="nabvar-item"
+              >0</span></a>
+          </li>
+          {{#if user}}
             <li>
-              <a href="/realtimeproducts">Real Time Products</a>
-            </li>
-            <li>
-              <a href="#">Cart<span
-                  id="cart-badge"
-                  class="uk-label"
-                >0</span></a>
-            </li>
-            {{#if user}}
-              <li>
-                <a>Account</a>
-                <div class="uk-navbar-dropdown">
-                  <ul class="uk-nav uk-navbar-dropdown-nav">
+              <a>Account</a>
+              <div class="navbar-dropdown">
+                <ul class="navbar-dropdown-list">
+                  <li>
+                    <a href="#">Profile</a>
+                  </li>
+                  {{#if user.isAdmin}}
                     <li>
-                      <a href="#">Profile</a>
+                      <a href="#">Admin</a>
                     </li>
-                    {{#if user.isAdmin}}
-                      <li>
-                        <a href="#">Admin</a>
-                      </li>
-                    {{/if}}
-                  </ul>
-                </div>
-              </li>
-            {{/if}}
-          </ul>
-        </div>
-      </nav>
-      <div
-        class="uk-width-1-1 uk-margin-remove uk-align-center uk-text-break uk-padding"
-      >
-        <h2 id="page-title">{{title}}</h2>
-        {{{body}}}
+                  {{/if}}
+                </ul>
+              </div>
+            </li>
+          {{/if}}
+        </ul>
       </div>
-    </div>
+    </nav>
+    {{{body}}}
     <script src="/socket.io/socket.io.js"></script>
     <script src="/static/js/{{jsFilename}}.js"></script>
     <script

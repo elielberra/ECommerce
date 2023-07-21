@@ -1,21 +1,22 @@
 const socket = io();
 
 const cartBadge = document.querySelector("#cart-badge");
+const hardCodedCartId = 1
 
 // Socket signal emision for loading the number of products on the cart badge
-socket.emit("loadInitialCartBadge", { cartId: 1 });
+socket.emit("loadInitialCartBadge", { cartId: hardCodedCartId });
 
 // Socket signal emission for when a new produc is added to the cart
 function addToCart(productId) {
-  socket.emit("addToCart", { cartId: 1, productId });
+  socket.emit("addToCart", { cartId: hardCodedCartId, productId });
 }
 
-// Socket signal recieval for updating the number of products on the cart badge
+// Socket signal receival for updating the number of products on the cart badge
 socket.on("productsInCart", (products) => {
   cartBadge.innerHTML = products.length;
 });
 
-// When a product is added on the POST /api/products endpoint this socket id will be activated
+// Socket signal receival for for when a product is added on the POST /api/products endpoint
 socket.on("productAdded", (product) => {
   console.log("Adding a new prodct from the Web Socket");
   const parentElement = document.getElementById("products");
@@ -43,6 +44,7 @@ socket.on("productAdded", (product) => {
   parentElement.prepend(newProduct);
 });
 
+// Socket signal receival for for when a product is deleted on the POST /api/products endpoint
 socket.on("productDeleted", (idToDelete) => {
   console.log("Deleting a new prodct from the Web Socket");
   // Remove the product that was deleted from the UI

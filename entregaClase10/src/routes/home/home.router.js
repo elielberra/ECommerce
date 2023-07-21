@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   const products = await productManager.getProducts();
   const isAdminBoolean = req.user.role === "admin";
   res.render("home", {
-    title: "Home",
     products,
     user: {
       ...req.user,
