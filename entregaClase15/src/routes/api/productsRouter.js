@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const mongoose = require("mongoose");
 const ProductManager = require("../../dao/managers/mongoDB/productManager");
-const productsModel = require("../../dao/models/productModel");
 
 const productManager = new ProductManager();
 const router = Router();

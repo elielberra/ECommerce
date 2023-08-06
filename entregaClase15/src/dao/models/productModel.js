@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const leanPreHook = require("./leanPreHook");
+const leanPreHook = require("./hooks/leanPreHook");
 
 const schema = new Schema({
   title: String,

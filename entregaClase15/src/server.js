@@ -4,9 +4,10 @@ const path = require("path");
 const express = require("express");
 const handlebars = require("express-handlebars");
 const { Server } = require("socket.io");
+const { connectToDatabase } = require("./utils");
 const { homeRouter } = require("./routes");
 const { apiRouter } = require("./routes");
-const { connectToDatabase } = require("./utils");
+const { chatRouter } = require("./routes");
 
 // Connect with MongoDB
 connectToDatabase();
@@ -42,9 +43,10 @@ app.set("view engine", "handlebars");
 const staticDir = path.join(__dirname, "..", "public");
 app.use("/static", express.static(staticDir));
 
-// Create a testing user with admin role
+// Middleware for defaulting testing user with admin role
 app.use((req, res, next) => {
   req.user = {
+    id: 1,
     name: "Testing Admin User",
     role: "admin",
   };
@@ -54,7 +56,8 @@ app.use((req, res, next) => {
 // Handle routes
 app.use("/", homeRouter);
 app.use("/api", apiRouter);
-// app.use("/realtimeproducts", realTimeProductsRouter);
+app.use("/chat", chatRouter);
+
 
 // Configure Request listener of the Server
 const port = 8080;

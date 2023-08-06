@@ -30,7 +30,6 @@ class CartsManager {
     if (!cart) {
       throw new Error("Cart not found");
     }
-    console.debug(cart)
     const existingProductIndex = cart.products.findIndex(
       (product) => product.product.toString() === productId
     );
