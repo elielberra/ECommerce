@@ -4,10 +4,8 @@ const path = require("path");
 const express = require("express");
 const handlebars = require("express-handlebars");
 const { Server } = require("socket.io");
-const mongoose = require("mongoose");
 const { homeRouter } = require("./routes");
 const { apiRouter } = require("./routes");
-const { realTimeProductsRouter } = require("./routes");
 const { connectToDatabase } = require("./utils");
 
 // Connect with MongoDB
@@ -59,7 +57,7 @@ app.use("/api", apiRouter);
 // app.use("/realtimeproducts", realTimeProductsRouter);
 
 // Configure Request listener of the Server
-port = 8080;
+const port = 8080;
 server.listen(port, () =>
   console.log(`Local server listening on port ${port}`)
 );

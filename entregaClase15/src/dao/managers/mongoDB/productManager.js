@@ -1,10 +1,9 @@
 const productsModel = require("../../models/productModel");
-const productsModule = require("../../models/productModel");
 
 class ProductManager {
   async getProducts() {
     try {
-      const products = await productsModule.find().lean();
+      const products = await productsModel.find().lean();
       const productsTitles = products
         .map((product) => product.title)
         .join(", ");
@@ -16,7 +15,7 @@ class ProductManager {
   }
 
   async getProductById(id) {
-    const matchedProduct = await productsModule.findOne({ _id: id });
+    const matchedProduct = await productsModel.findOne({ _id: id });
     if (matchedProduct) {
       console.log(
         `The product that matched the id ${id} is:\n${JSON.stringify(

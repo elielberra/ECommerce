@@ -4,8 +4,14 @@ const CartsManager = require("../../dao/managers/mongoDB/cartManager");
 const cartManager = new CartsManager();
 const router = Router();
 
+router.get("/", async (req, res) => {
+  console.log("Retrieving carts");
+  const carts = await cartManager.getCarts();
+  res.send(carts);
+});
+
 router.get("/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   const cart = await cartManager.getCartById(id);
   if (cart) {
     res.send(cart);
@@ -16,8 +22,9 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  const cart = req.body;
   try {
-    const newCart = await cartManager.addCart();
+    const newCart = await cartManager.addCart(cart);
     res
       .status(200)
       .send(
@@ -32,20 +39,39 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.use("/:cid/product/:pid", async (req, res) => {
-  console.log("INSIDE ADD CID PID");
-  const cartId = parseInt(req.params.cid);
-  const productId = parseInt(req.params.pid);
+router.put("/:cid/product/:pid", async (req, res) => {
+  const cartId = req.params.cid;
+  const productId = req.params.pid;
   const updatedCart = await cartManager.addProductToCart(cartId, productId);
   if (updatedCart) {
-    res
-      .status(200)
-      .send(
-        `The product was successfully added to the cart.`
-      );
+    res.status(200).send(`The product was successfully added to the cart.`);
   } else {
     res.status(404);
     res.send(`Please enter a valid cart ID and / or a valid product ID.`);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const dbOperationResult = await cartManager.deleteCart(id);
+    if (dbOperationResult.deletedCount >= 1) {
+      res.status(200).send("The cart was deleted successfully.");
+      return;
+    } else {
+      res
+        .status(404)
+        .send(
+          `No matching cart was found with the ID ${id}. It can't be modified.`
+        );
+      return;
+    }
+  } catch (error) {
+    res.status(500).send({
+      message:
+        "There was been an error with the server. Please try again later.",
+      exception: error.stack,
+    });
   }
 });
 
