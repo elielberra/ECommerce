@@ -1,5 +1,7 @@
 const { Router } = require("express");
-const ProductManager = require("../../managers/productManager");
+const mongoose = require("mongoose");
+const ProductManager = require("../../dao/managers/mongoDB/productManager");
+const productsModel = require("../../dao/models/productModel");
 
 const productManager = new ProductManager();
 const router = Router();
@@ -15,13 +17,20 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  product = await productManager.getProductById(id);
-  if (product) {
-    res.send(product);
+  const id = req.params.id;
+  if (mongoose.isValidObjectId(id)) {
+    const product = await productManager.getProductById(id);
+    if (product) {
+      res.send(product);
+    } else {
+      res.status(404);
+      res.send(`The product with the ID ${id} was not found.`);
+    }
   } else {
-    res.status(404);
-    res.send(`The product with the ID ${id} was not found.`);
+    console.log(
+      `Invalid ObjectId format. Received ID: ${id}  -- Of type ${typeof id}`
+    );
+    res.status(500).send(`The product with the ID ${id} was not found.`);
   }
 });
 
@@ -29,8 +38,6 @@ router.post("/", async (req, res) => {
   const { body: product } = req;
   try {
     const newProduct = await productManager.addProduct(product);
-    // Send the signal on the socket that a new product has been added
-    req.socket.emit("productAdded", newProduct)
     res.status(201).send(newProduct);
   } catch (error) {
     res.status(400).send(error.message);
@@ -39,11 +46,13 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { body: product } = req;
-  const { id: stringId } = req.params;
-  const id = parseInt(stringId);
+  const { id } = req.params;
   try {
-    const matchingProduct = await productManager.getProductById(id);
-    if (!matchingProduct) {
+    const dbOperationResult = await productManager.updateProduct(id, product);
+    if (dbOperationResult.matchedCount >= 1) {
+      res.status(200).send("The product was updated successfully.");
+      return;
+    } else {
       res
         .status(404)
         .send(
@@ -51,8 +60,6 @@ router.put("/:id", async (req, res) => {
         );
       return;
     }
-    await productManager.updateProduct(id, product);
-    res.status(200).send("The product was updated successfully.");
   } catch (error) {
     res.status(500).send({
       message:
@@ -63,22 +70,20 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const { id: stringId } = req.params;
-  const id = parseInt(stringId);
+  const { id } = req.params;
   try {
-    const matchingProduct = await productManager.getProductById(id);
-    if (!matchingProduct) {
+    const dbOperationResult = await productManager.deleteProduct(id);
+    if (dbOperationResult.deletedCount >= 1) {
+      res.status(200).send("The product was deleted successfully.");
+      return;
+    } else {
       res
         .status(404)
         .send(
-          `No matching product was found with the ID ${id}. It can't be deleted.`
+          `No matching product was found with the ID ${id}. It can't be modified.`
         );
       return;
     }
-    await productManager.deleteProduct(id);
-    // Send the signal on the socket that a new product has been added
-    req.socket.emit("productDeleted", id)
-    res.status(200).send("The product was deleted successfully.");
   } catch (error) {
     res.status(500).send({
       message:

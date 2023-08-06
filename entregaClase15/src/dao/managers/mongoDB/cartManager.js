@@ -108,7 +108,7 @@ class CartsManager {
             quantity: newProductQuantity,
           };
           productInCart.quantity += 1;
-          console.log(newProductInCart)
+          console.log(newProductInCart);
           // If the cart does NOT have that product added, set its initial quantity to 1
         } else {
           const newProductInCart = {

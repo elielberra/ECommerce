@@ -12,16 +12,16 @@ function getRandomRoundNumber(min, max) {
 }
 
 async function connectToDatabase() {
-    try {
-      //  await mongoose.connect("mongodb://localhost:27017/")
-      await mongoose.connect(
-        "mongodb+srv://App:9GzdKAD66G7At9dp@ecommercecodercluster.w4doywi.mongodb.net/?retryWrites=true&w=majority"
-      );
-      console.log("You have connected to the Database");
-    } catch (Error) {
-      console.log("There was an error while trying to connect to the Database");
-      throw Error;
-    }
+  try {
+    //  await mongoose.connect("mongodb://localhost:27017/")
+    await mongoose.connect(
+      "mongodb+srv://App:9GzdKAD66G7At9dp@ecommercecodercluster.w4doywi.mongodb.net/ecommerce?retryWrites=true&w=majority"
+    );
+    console.log("You have connected to the Database");
+  } catch (Error) {
+    console.log("There was an error while trying to connect to the Database");
+    throw Error;
+  }
 }
 
 module.exports = { getRandomNumber, getRandomRoundNumber, connectToDatabase };
