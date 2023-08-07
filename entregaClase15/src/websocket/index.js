@@ -9,7 +9,7 @@ async function socketHandler(socket) {
   socket.emit("load-chat-messages", previousMessages);
 
   socket.on("user-action", ({ user, action }) => {
-    console.debug("user-action server side", action);
+    
     if (action === "joined") {
         socket.user = user
     }
@@ -17,7 +17,7 @@ async function socketHandler(socket) {
   });
 
   socket.on("new-message", async (message) => {
-    console.debug("MESSAGE", message);
+    
     await chatMessageManager.addMessage(message);
     socket.broadcast.emit('new-message-render', message)
   });

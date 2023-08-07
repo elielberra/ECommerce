@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-const productsModel = require("../models/productModel");
+const productsModel = require("../dao/models/productModel");
 const { connectToDatabase } = require("../utils");
 
 connectToDatabase();

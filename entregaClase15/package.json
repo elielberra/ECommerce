@@ -4,14 +4,18 @@
   "description": "API for retrieving products",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./src/server.js",
+    "start": "cross-env DB_ENVIRONMENT=atlas nodemon ./src/server.js",
+    "start:local": "cross-env DB_ENVIRONMENT=local nodemon ./src/server.js",
     "seed": "node ./src/scripts/seedProducts.js",
+    "seed:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/seedProducts.js",
     "delete:products": "node ./src/scripts/deleteCollection.js products",
     "delete:chatmessages": "node ./src/scripts/deleteCollection.js chatmessages"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.7",
     "mongoose": "^7.4.1",

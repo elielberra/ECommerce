@@ -80,7 +80,7 @@ Swal.fire({
   ({ value }) => {
     const username = value;
     socket.username = username;
-    console.debug("before emmit user-action signal");
+    
     socket.emit("user-action", { user: username, action: "joined" });
     for (const { user, datetime, message } of previousMessages) {
       appendMessage(user, datetime, message);
