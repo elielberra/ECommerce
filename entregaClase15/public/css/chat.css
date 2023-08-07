@@ -1,4 +1,4 @@
-#page-container {
+/* #page-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -9,6 +9,20 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+#page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 150px); /* Subtract the padding from the total viewport height */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll; /* Add scrollbar when content exceeds container height */
 }
 
 #messages {
