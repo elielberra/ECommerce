@@ -3,7 +3,7 @@ const productsModel = require("../../models/productModel");
 class ProductManager {
   async getProducts() {
     try {
-      const products = await productsModel.find().lean();
+      const products = await productsModel.find();
       const productsTitles = products
         .map((product) => product.title)
         .join(", ");

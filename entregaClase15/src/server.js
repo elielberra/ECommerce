@@ -8,6 +8,7 @@ const { connectToDatabase } = require("./utils");
 const { homeRouter } = require("./routes");
 const { apiRouter } = require("./routes");
 const { chatRouter } = require("./routes");
+const socketHandler = require("./websocket")
 
 // Connect with MongoDB
 connectToDatabase();
@@ -18,8 +19,8 @@ const app = express();
 // Create Websocket
 const server = http.createServer(app);
 const io = new Server(server);
-// const socketManager = require("./src/websocket");
-// io.on("connection", socketManager);
+io.on("connection", socketHandler);
+
 // Middleware for using the same socket on other routes
 app.use((req, res, next) => {
   req.socket = io;

@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const leanPreHook = require("./hooks/leanPreHook");
+const leanHook = require("./hooks/leanHook");
 
 const schema = new Schema({
   title: String,
@@ -13,7 +13,7 @@ const schema = new Schema({
   createdDate: { type: Number, default: Date.now() },
 });
 
-schema.pre(["findOne", "find"], leanPreHook);
+schema.pre(["findOne", "find"], leanHook);
 
 const productsModel = model("products", schema);
 

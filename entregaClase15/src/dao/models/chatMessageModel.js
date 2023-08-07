@@ -1,10 +1,14 @@
 const { Schema, model } = require("mongoose");
+const leanHook = require("./hooks/leanHook");
 
 const schema = new Schema({
   user: String,
-  messages: String
+  message: String,
+  datetime: String
 });
 
-const chatMessagesModel = model("chatMessages", schema);
+schema.pre(["findOne", "find"], leanHook);
+
+const chatMessagesModel = model("chatmessages", schema);
 
 module.exports = chatMessagesModel;

@@ -1,43 +1,23 @@
-// const ProductManager = require("../managers/productManager.js");
-// const CartManager = require("../managers/cartManager.js");
-// const { getRandomRoundNumber } = require("../utils");
-// const productManager = new ProductManager();
-// const cartManager = new CartManager();
+const ChatMessageManager = require("../dao/managers/mongoDB/chatMessageManager");
 
-// async function sendInitialDiscount(socket) {
-//   const product = await productManager.getRandomProduct();
-//   socket.emit("promo", { title: product.title, sale: 15 });
-// }
+const chatMessageManager = new ChatMessageManager();
 
-// function socketManager(socket) {
-//   console.log(
-//     `A new connection has been established with this socket with the id: ${socket.id}`
-//   );
-//   sendInitialDiscount(socket);
+async function socketHandler(socket) {
+  console.log(
+    `A new connection has been established with this socket with the id: ${socket.id}`
+  );
 
-//   socket.on("loadInitialCartBadge", async ({ cartId }) => {
-//     const cart = await cartManager.getCartById(cartId);
-//     const cartProducts = cart.products;
-//     socket.emit("productsInCart", cartProducts);
-//   });
+  const previousMessages = await chatMessageManager.getMessages();
+  socket.emit("load-chat-messages", previousMessages);
 
-//   socket.on("promo", async () => {
-//     const product = await productManager.getRandomProduct();
-//     const saleDiscount = getRandomRoundNumber(10, 50);
-//     console.log("saleDiscount", saleDiscount);
-//     socket.emit("promo", { title: product.title, sale: saleDiscount });
-//   });
+  socket.on("disconnect", () => {
+    console.log(`The connection with the id ${socket.id} has closed`);
+  });
 
-//   socket.on("addToCart", async ({ cartId, productId }) => {
-//     await cartManager.addProductToCart(cartId, productId);
-//     const cart = await cartManager.getCartById(cartId);
-//     const cartProducts = cart.products;
-//     socket.emit("productsInCart", cartProducts);
-//   });
+  socket.on("user-action", ({ user, action }) => {
+    console.debug("user-action server side");
+    socket.broadcast.emit("user-action-render", { user, action });
+  });
+}
 
-//   socket.on("disconnect", () => {
-//     console.log("user disconnected");
-//   });
-// }
-
-// module.exports = socketManager;
+module.exports = socketHandler;
