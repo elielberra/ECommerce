@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon ./src/server.js",
     "seed": "node ./src/scripts/seedProducts.js",
-    "deleteAll": "node ./src/scripts/deleteAllProducts.js"
+    "delete:products": "node ./src/scripts/deleteCollection.js products",
+    "delete:chatmessages": "node ./src/scripts/deleteCollection.js chatmessages"
   },
   "author": "",
   "license": "ISC",

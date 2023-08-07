@@ -1,6 +1,4 @@
-const ChatMessageManager = require("../dao/managers/mongoDB/chatMessageManager");
-
-const chatMessageManager = new ChatMessageManager();
+const chatMessageManager = require("../dao/managers/mongoDB/chatMessageManager");
 
 async function socketHandler(socket) {
   console.log(
@@ -9,7 +7,6 @@ async function socketHandler(socket) {
 
   const previousMessages = await chatMessageManager.getMessages();
   socket.emit("load-chat-messages", previousMessages);
-
 
   socket.on("user-action", ({ user, action }) => {
     console.debug("user-action server side", action);

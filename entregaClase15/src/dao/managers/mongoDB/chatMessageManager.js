@@ -1,6 +1,6 @@
 const chatMessagesModel = require("../../models/chatMessageModel");
 
-class ChatMessagesManager {
+class ChatMessageManager {
   async getMessages() {
     try {
       const messages = await chatMessagesModel.find();
@@ -18,4 +18,4 @@ class ChatMessagesManager {
   }
 }
 
-module.exports = ChatMessagesManager;
+module.exports = new ChatMessageManager();

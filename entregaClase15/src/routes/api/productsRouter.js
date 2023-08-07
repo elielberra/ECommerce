@@ -1,17 +1,14 @@
 const { Router } = require("express");
 const mongoose = require("mongoose");
-const ProductManager = require("../../dao/managers/mongoDB/productManager");
+const productManager = require("../../dao/managers/mongoDB/productManager");
 
-const productManager = new ProductManager();
 const router = Router();
 
 router.get("/", async (req, res) => {
   console.log("Retrieving products");
-  let products = await productManager.getProducts();
-  const { limit } = req.query;
-  if (limit) {
-    products = products.slice(0, limit);
-  }
+  let { limit } = req.query;
+  limit = parseInt(limit);
+  let products = await productManager.getProducts(limit);
   res.send(products);
 });
 
@@ -63,7 +60,7 @@ router.put("/:id", async (req, res) => {
     res.status(500).send({
       message:
         "There was been an error with the server. Please try again later.",
-      exception: error.stack,
+      exception: error.stack
     });
   }
 });
@@ -87,7 +84,7 @@ router.delete("/:id", async (req, res) => {
     res.status(500).send({
       message:
         "There was been an error with the server. Please try again later.",
-      exception: error.stack,
+      exception: error.stack
     });
   }
 });

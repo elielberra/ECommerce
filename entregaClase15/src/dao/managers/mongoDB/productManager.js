@@ -1,9 +1,9 @@
 const productsModel = require("../../models/productModel");
 
 class ProductManager {
-  async getProducts() {
+  async getProducts(limit_size) {
     try {
-      const products = await productsModel.find();
+      const products = await productsModel.find().limit(limit_size);
       const productsTitles = products
         .map((product) => product.title)
         .join(", ");
@@ -96,4 +96,4 @@ class ProductManager {
   }
 }
 
-module.exports = ProductManager;
+module.exports = new ProductManager();

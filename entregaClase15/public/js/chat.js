@@ -33,7 +33,8 @@ function messageSentHandler(event) {
   const messageText = userInput.value;
   const datetime = new Date().toLocaleTimeString([], {
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
+    hour12: false
   });
   const message = {
     user: username,

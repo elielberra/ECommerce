@@ -1,6 +1,6 @@
 const cartsModel = require("../../models/cartModel");
 
-class CartsManager {
+class CartManager {
   async getCarts() {
     const carts = await cartsModel.find();
     return carts;
@@ -49,4 +49,4 @@ class CartsManager {
   }
 }
 
-module.exports = CartsManager;
+module.exports = new CartManager();
