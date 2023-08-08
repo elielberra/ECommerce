@@ -49,9 +49,7 @@ class ProductManager {
   }
 
   async validateCodeUnique(product) {
-    
     const existingCodes = await productsModel.distinct("code");
-    
     console.log("Validating if the code is unique");
     if (existingCodes.includes(product.code)) {
       throw new Error(

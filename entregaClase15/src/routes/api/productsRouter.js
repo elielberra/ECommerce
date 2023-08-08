@@ -7,9 +7,19 @@ const router = Router();
 router.get("/", async (req, res) => {
   console.log("Retrieving products");
   let { limit } = req.query;
-  limit = parseInt(limit);
-  let products = await productManager.getProducts(limit);
-  res.send(products);
+  if (limit) {
+    limit = parseInt(limit);
+    if (!Number.isInteger(limit) || limit < 0) {
+      res
+        .status(400)
+        .send(
+          "The limit query parameter is invalid. It should be a number equal or higher than 0"
+        );
+        return
+    }
+  }
+  let products = await productManager.getProducts(limit ? limit : 0);
+  res.status(200).send(products);
 });
 
 router.get("/:id", async (req, res) => {
@@ -19,12 +29,11 @@ router.get("/:id", async (req, res) => {
     if (product) {
       res.send(product);
     } else {
-      res.status(404);
-      res.send(`The product with the ID ${id} was not found.`);
+      res.status(404).send(`The product with the ID ${id} was not found.`);
     }
   } else {
     console.log(
-      `Invalid ObjectId format. Received ID: ${id}  -- Of type ${typeof id}`
+      `Invalid ObjectId format. Received ID: ${id} -- Of type ${typeof id}`
     );
     res.status(500).send(`The product with the ID ${id} was not found.`);
   }
@@ -82,8 +91,7 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     res.status(500).send({
-      message:
-        "There was been an error with the server. Please try again later.",
+      message: "There was been an error with the server.",
       exception: error.stack
     });
   }
