@@ -5,7 +5,7 @@ const productManager = require("../../dao/managers/mongoDB/productManager");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  console.log("Retrieving products");
+  process.env.VERBOSE && console.log("Retrieving products");
   let { limit } = req.query;
   if (limit) {
     limit = parseInt(limit);
@@ -13,29 +13,34 @@ router.get("/", async (req, res) => {
       res
         .status(400)
         .send(
-          "The limit query parameter is invalid. It should be a number equal or higher than 0"
+          "The limit query parameter is invalid. It should be an integer number equal or higher than 0"
         );
-        return
+      return;
     }
   }
-  let products = await productManager.getProducts(limit ? limit : 0);
-  res.status(200).send(products);
+  try {
+    let products = await productManager.getProducts(limit ? limit : 0);
+    res.status(200).send(products);
+  } catch (error) {
+    res.status(500).send(`There was been an error with the server.\n${error}`);
+  }
 });
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  if (mongoose.isValidObjectId(id)) {
+  if (!mongoose.isValidObjectId(id)) {
+    res.status(400).send("Please enter a valid ID with its proper format");
+    return;
+  }
+  try {
     const product = await productManager.getProductById(id);
     if (product) {
-      res.send(product);
+      res.status(200).send(product);
     } else {
       res.status(404).send(`The product with the ID ${id} was not found.`);
     }
-  } else {
-    console.log(
-      `Invalid ObjectId format. Received ID: ${id} -- Of type ${typeof id}`
-    );
-    res.status(500).send(`The product with the ID ${id} was not found.`);
+  } catch (error) {
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
@@ -45,13 +50,17 @@ router.post("/", async (req, res) => {
     const newProduct = await productManager.addProduct(product);
     res.status(201).send(newProduct);
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
 router.put("/:id", async (req, res) => {
   const { body: product } = req;
   const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    res.status(400).send("Please enter a valid ID with its proper format");
+    return;
+  }
   try {
     const dbOperationResult = await productManager.updateProduct(id, product);
     if (dbOperationResult.matchedCount >= 1) {
@@ -61,16 +70,12 @@ router.put("/:id", async (req, res) => {
       res
         .status(404)
         .send(
-          `No matching product was found with the ID ${id}. It can't be modified.`
+          `No matching product was found with the ID ${id}. It cannot be modified.`
         );
       return;
     }
   } catch (error) {
-    res.status(500).send({
-      message:
-        "There was been an error with the server. Please try again later.",
-      exception: error.stack
-    });
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
@@ -79,21 +84,18 @@ router.delete("/:id", async (req, res) => {
   try {
     const dbOperationResult = await productManager.deleteProduct(id);
     if (dbOperationResult.deletedCount >= 1) {
-      res.status(200).send("The product was deleted successfully.");
+      res.status(200).send("The product was deleted successfully");
       return;
     } else {
       res
         .status(404)
         .send(
-          `No matching product was found with the ID ${id}. It can't be modified.`
+          `No matching product was found with the ID ${id}. It cannot be deleted`
         );
       return;
     }
   } catch (error) {
-    res.status(500).send({
-      message: "There was been an error with the server.",
-      exception: error.stack
-    });
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 

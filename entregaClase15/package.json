@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "cross-env DB_ENVIRONMENT=atlas nodemon ./src/server.js",
+    "start:verbose": "cross-env DB_ENVIRONMENT=atlas VERBOSE=true nodemon ./src/server.js",
     "start:local": "cross-env DB_ENVIRONMENT=local nodemon ./src/server.js",
+    "start:local:verbose": "cross-env DB_ENVIRONMENT=local VERBOSE=true nodemon ./src/server.js",
     "seed": "node ./src/scripts/seedProducts.js",
     "seed:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/seedProducts.js",
     "delete:products": "node ./src/scripts/deleteCollection.js products",

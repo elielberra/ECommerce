@@ -21,22 +21,22 @@ class CartsManager {
   }
 
   async checkIfFileExists() {
-    console.log("Checking if the carts file exists");
+    process.env.VERBOSE && console.log("Checking if the carts file exists");
     try {
       await fs.access(this.filepath);
-      console.log("The carts file exists");
+      process.env.VERBOSE && console.log("The carts file exists");
       return true;
     } catch {
-      console.log("The carts file does not exist. It will be created");
+      process.env.VERBOSE && console.log("The carts file does not exist. It will be created");
       return false;
     }
   }
 
   async createCartsFile() {
     try {
-      console.log("Creating the carts file");
+      process.env.VERBOSE && console.log("Creating the carts file");
       await fs.writeFile(this.filepath, "[]");
-      console.log(`The carts file ${this.filename} was created`);
+      process.env.VERBOSE && console.log(`The carts file ${this.filename} was created`);
     } catch (error) {
       console.error("Error while trying to create the carts file:\n", error);
     }
@@ -48,7 +48,7 @@ class CartsManager {
       if (!fileExists) {
         await this.createCartsFile();
       }
-      console.log("Retrieving the list of carts");
+      process.env.VERBOSE && console.log("Retrieving the list of carts");
       const data = await fs.readFile(this.filepath, "utf-8");
       const carts = JSON.parse(data);
       return carts;
@@ -61,7 +61,7 @@ class CartsManager {
     const carts = await this.getCarts();
     const matchedCart = carts.find((cart) => cart.id === id);
     if (matchedCart) {
-      console.log(
+      process.env.VERBOSE && console.log(
         `The cart that matched the id ${id} is:\n${JSON.stringify(matchedCart)}`
       );
       return matchedCart;
@@ -73,7 +73,7 @@ class CartsManager {
   async writeCarts(carts) {
     const cartsData = JSON.stringify(carts, null, 2);
     try {
-      console.log(`Writing the carts to the file ${this.filename}`);
+      process.env.VERBOSE && console.log(`Writing the carts to the file ${this.filename}`);
       await fs.writeFile(this.filepath, cartsData);
     } catch (error) {
       console.error(
@@ -115,7 +115,7 @@ class CartsManager {
             quantity: newProductQuantity
           };
           productInCart.quantity += 1;
-          console.log(newProductInCart);
+          process.env.VERBOSE && console.log(newProductInCart);
           // If the cart does NOT have that product added, set its initial quantity to 1
         } else {
           const newProductInCart = {

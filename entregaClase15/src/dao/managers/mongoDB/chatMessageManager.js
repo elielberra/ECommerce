@@ -11,9 +11,9 @@ class ChatMessageManager {
   }
 
   async addMessage(message) {
-    console.log("A new message will be added. The new message is:\n", message);
+    process.env.VERBOSE && console.log("A new message will be added. The new message is:\n", message);
     const newMessage = await chatMessagesModel.create(message);
-    console.log("The message has been successfully saved on the Database");
+    process.env.VERBOSE && console.log("The message has been successfully saved on the Database");
     return newMessage;
   }
 }

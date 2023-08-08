@@ -57,7 +57,7 @@ socket.on("new-message-render", ({ user, datetime, message }) => {
   appendMessage(user, datetime, message);
 });
 socket.on("disconnect", () => {
-  console.log("Disconnecting from the socket on the client side");
+  process.env.VERBOSE && console.log("Disconnecting from the socket on the client side");
 });
 
 let previousMessages = [];

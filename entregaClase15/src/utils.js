@@ -23,9 +23,9 @@ async function connectToDatabase() {
   }
   try {
     await mongoose.connect(mongoURI);
-    console.log("You have connected to the Database");
+    process.env.VERBOSE && console.log("You have connected to the Database");
   } catch (Error) {
-    console.log("There was an error while trying to connect to the Database");
+    process.env.VERBOSE && console.log("There was an error while trying to connect to the Database");
     throw Error;
   }
 }

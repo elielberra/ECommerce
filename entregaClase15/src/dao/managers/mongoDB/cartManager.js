@@ -9,7 +9,7 @@ class CartManager {
   async getCartById(id) {
     const matchedCart = await cartsModel.find({ _id: id });
     if (matchedCart) {
-      console.log(
+      process.env.VERBOSE && console.log(
         `The cart that matched the id ${id} is:\n${JSON.stringify(matchedCart)}`
       );
       return matchedCart;
@@ -20,7 +20,7 @@ class CartManager {
 
   async addCart(cart) {
     const newCart = await cartsModel.create(cart);
-    console.log("The cart has been successfully saved on the Database");
+    process.env.VERBOSE && console.log("The cart has been successfully saved on the Database");
     return newCart;
   }
 
@@ -43,7 +43,7 @@ class CartManager {
   }
 
   async deleteCart(id) {
-    console.log(`Deleting the cart with id ${id}`);
+    process.env.VERBOSE && console.log(`Deleting the cart with id ${id}`);
     const dbOperationResult = await cartsModel.deleteOne({ _id: id });
     return dbOperationResult;
   }

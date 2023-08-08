@@ -63,5 +63,5 @@ app.use("/chat", chatRouter);
 // Configure Request listener of the Server
 const port = 8080;
 server.listen(port, () =>
-  console.log(`Local server listening on port ${port}`)
+  process.env.VERBOSE && console.log(`Local server listening on port ${port}`)
 );

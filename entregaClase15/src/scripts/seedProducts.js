@@ -10,7 +10,7 @@ async function seed() {
   const data = await fs.readFile(filepath, "utf-8");
   const products = JSON.parse(data);
   const dbOperationResult = await productsModel.insertMany(products);
-  console.log(
+  process.env.VERBOSE && console.log(
     "The result of trying to seed the initial load of the products to the MongoDB was",
     dbOperationResult
   );

@@ -7,7 +7,7 @@ class ProductManager {
       const productsTitles = products
         .map((product) => product.title)
         .join(", ");
-      console.log(`The products are: ${productsTitles}`);
+      process.env.VERBOSE && console.log(`The products are: ${productsTitles}`);
       return products;
     } catch (error) {
       console.error("Error while trying to get the products:\n", error);
@@ -17,7 +17,7 @@ class ProductManager {
   async getProductById(id) {
     const matchedProduct = await productsModel.findOne({ _id: id });
     if (matchedProduct) {
-      console.log(
+      process.env.VERBOSE && console.log(
         `The product that matched the id ${id} is:\n${JSON.stringify(
           matchedProduct
         )}`
@@ -45,18 +45,18 @@ class ProductManager {
         );
       }
     }
-    console.log("All the required fields were entered");
+    process.env.VERBOSE && console.log("All the required fields were entered");
   }
 
   async validateCodeUnique(product) {
     const existingCodes = await productsModel.distinct("code");
-    console.log("Validating if the code is unique");
+    process.env.VERBOSE && console.log("Validating if the code is unique");
     if (existingCodes.includes(product.code)) {
       throw new Error(
         "The product's code already exists, therefore, the product will NOT be added to the list"
       );
     } else {
-      console.log("The code is unique. The product will be registered");
+      process.env.VERBOSE && console.log("The code is unique. The product will be registered");
     }
   }
 
@@ -66,12 +66,12 @@ class ProductManager {
       this.validateReqFields(product);
       this.validateCodeUnique(product);
     } catch (error) {
-      console.log(error.message);
+      process.env.VERBOSE && console.log(error.message);
       throw error;
     }
-    console.log("A new product will be added. The new product is:\n", product);
+    process.env.VERBOSE && console.log("A new product will be added. The new product is:\n", product);
     const newProduct = await productsModel.create(product);
-    console.log("The product has been successfully saved on the Database");
+    process.env.VERBOSE && console.log("The product has been successfully saved on the Database");
     return newProduct;
   }
 
@@ -83,12 +83,12 @@ class ProductManager {
       );
       return dbOperationResult;
     } catch (error) {
-      console.log(`No matching product was found with the id ${id}`);
+      process.env.VERBOSE && console.log(`No matching product was found with the id ${id}`);
     }
   }
 
   async deleteProduct(id) {
-    console.log(`Deleting the product with id ${id}`);
+    process.env.VERBOSE && console.log(`Deleting the product with id ${id}`);
     const dbOperationResult = await productsModel.deleteOne({ _id: id });
     return dbOperationResult;
   }

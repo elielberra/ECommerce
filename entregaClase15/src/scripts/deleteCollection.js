@@ -16,7 +16,7 @@ async function deleteCollection(collection) {
   } else {
     throw new Error(`${collection} is not a valid collection`);
   }
-  console.log(
+  process.env.VERBOSE && console.log(
     `The result of trying to delete the collection ${collection} from MongoDB was`,
     dbOperationResult
   );

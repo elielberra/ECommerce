@@ -1,7 +1,7 @@
 const chatMessageManager = require("../dao/managers/mongoDB/chatMessageManager");
 
 async function socketHandler(socket) {
-  console.log(
+  process.env.VERBOSE && console.log(
     `A new connection has been established with this socket with the id: ${socket.id}`
   );
 
@@ -21,7 +21,7 @@ async function socketHandler(socket) {
   });
 
   socket.on("disconnect", () => {
-    console.log(`The connection with the id ${socket.id} has closed`);
+    process.env.VERBOSE && console.log(`The connection with the id ${socket.id} has closed`);
     socket.broadcast.emit("user-action-render", { user: socket.user, action: "exited" });
   });
 }

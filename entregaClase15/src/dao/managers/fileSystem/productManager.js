@@ -11,22 +11,22 @@ class ProductManager {
   }
 
   async checkIfFileExists() {
-    console.log("Checking if the products file exists");
+    process.env.VERBOSE && console.log("Checking if the products file exists");
     try {
       await fs.access(this.filepath);
-      console.log("The products file exists");
+      process.env.VERBOSE && console.log("The products file exists");
       return true;
     } catch {
-      console.log("The products file does not exist. It will be created");
+      process.env.VERBOSE && console.log("The products file does not exist. It will be created");
       return false;
     }
   }
 
   async createProductsFile() {
     try {
-      console.log("Creating the products file");
+      process.env.VERBOSE && console.log("Creating the products file");
       await fs.writeFile(this.filepath, "[]");
-      console.log(`The products file ${this.filename} was created`);
+      process.env.VERBOSE && console.log(`The products file ${this.filename} was created`);
     } catch (error) {
       console.error("Error while trying to create the products file:\n", error);
     }
@@ -38,11 +38,11 @@ class ProductManager {
       if (!fileExists) {
         await this.createProductsFile();
       }
-      console.log("Retrieving the list of products");
+      process.env.VERBOSE && console.log("Retrieving the list of products");
       const data = await fs.readFile(this.filepath, "utf-8");
       const products = JSON.parse(data);
       const productsTitles = products.map(product => product.title).join(', ');
-      console.log(`The products are: ${productsTitles}`)
+      process.env.VERBOSE && console.log(`The products are: ${productsTitles}`)
       return products;
     } catch (error) {
       console.error("Error while trying to get the products:\n", error);
@@ -53,7 +53,7 @@ class ProductManager {
     const products = await this.getProducts();
     const matchedProduct = products.find((product) => product.id === id);
     if (matchedProduct) {
-      console.log(
+      process.env.VERBOSE && console.log(
         `The product that matched the id ${id} is:\n${JSON.stringify(
           matchedProduct
         )}`
@@ -91,25 +91,25 @@ class ProductManager {
         );
       }
     }
-    console.log("All the required fields were entered");
+    process.env.VERBOSE && console.log("All the required fields were entered");
   }
 
   validateCodeUnique(existingProducts, product) {
     const existingCodes = existingProducts.map((product) => product.code);
-    console.log("Validating if the code is unique");
+    process.env.VERBOSE && console.log("Validating if the code is unique");
     if (existingCodes.includes(product.code)) {
       throw new Error(
         "The product's code already exists, therefore, the product will NOT be added to the list"
       );
     } else {
-      console.log("The code is unique. The product will be registered");
+      process.env.VERBOSE && console.log("The code is unique. The product will be registered");
     }
   }
 
   async writeProducts(products) {
     const productsData = JSON.stringify(products, null, 2);
     try {
-      console.log(`Writing the products to the file ${this.filename}`);
+      process.env.VERBOSE && console.log(`Writing the products to the file ${this.filename}`);
       await fs.writeFile(this.filepath, productsData);
     } catch (error) {
       console.error(
@@ -133,13 +133,13 @@ class ProductManager {
       this.validateReqFields(newProduct);
       this.validateCodeUnique(products, newProduct);
     } catch (error) {
-      console.log(error.message);
+      process.env.VERBOSE && console.log(error.message);
       throw error;
     }
-    console.log("A new product will be added. The new product is:\n", newProduct)
+    process.env.VERBOSE && console.log("A new product will be added. The new product is:\n", newProduct)
     products.push(newProduct);
     await this.writeProducts(products);
-    console.log("The product has been successfully saved on the Database")
+    process.env.VERBOSE && console.log("The product has been successfully saved on the Database")
     return newProduct;
   }
 
@@ -150,17 +150,17 @@ class ProductManager {
         Object.entries(fieldsToUpdate).forEach(
           ([prop, value]) => (product[prop] = value)
         );
-        console.log("Updated product: ", JSON.stringify(product));
+        process.env.VERBOSE && console.log("Updated product: ", JSON.stringify(product));
         await this.writeProducts(products);
         return product;
       }
     }
-    console.log(`No matching product was found with the id ${id}`);
+    process.env.VERBOSE && console.log(`No matching product was found with the id ${id}`);
   }
 
   async deleteProduct(id) {
     const products = await this.getProducts();
-    console.log(`Deleting the product with id ${id}`);
+    process.env.VERBOSE && console.log(`Deleting the product with id ${id}`);
     const filteredProducts = products.filter((product) => product.id != id);
     if (JSON.stringify(products) === JSON.stringify(filteredProducts)) {
       console.error(`No atribute with the id ${id} was found`);
