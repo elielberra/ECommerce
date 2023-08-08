@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
   const { body: product } = req;
   try {
     const newProduct = await productManager.addProduct(product);
-    res.status(201).send(newProduct);
+    res.status(201).send(`The product was succesfully created.\n${JSON.stringify(newProduct)}`);
   } catch (error) {
     res.status(500).send(`There was been an error with the server.\n${error}`);
   }
@@ -70,7 +70,7 @@ router.put("/:id", async (req, res) => {
       res
         .status(404)
         .send(
-          `No matching product was found with the ID ${id}. It cannot be modified.`
+          `No matching product was found with the ID ${id}. It was not be modified.`
         );
       return;
     }

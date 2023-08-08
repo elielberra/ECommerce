@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Router } = require("express");
 const cartManager = require("../../dao/managers/mongoDB/cartManager");
 
@@ -5,18 +6,29 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   process.env.VERBOSE && console.log("Retrieving carts");
-  const carts = await cartManager.getCarts();
-  res.send(carts);
+  try {
+    const carts = await cartManager.getCarts();
+    res.status(200).send(carts);
+  } catch (error) {
+    res.status(500).send(`There was been an error with the server.\n${error}`);
+  }
 });
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const cart = await cartManager.getCartById(id);
-  if (cart) {
-    res.send(cart);
-  } else {
-    res.status(404);
-    res.send(`The cart with the ID ${id} was not found.`);
+  if (!mongoose.isValidObjectId(id)) {
+    res.status(400).send("Please enter a valid ID with its proper format");
+    return;
+  }
+  try {
+    const cart = await cartManager.getCartById(id);
+    if (cart) {
+      res.status(200).send(cart);
+    } else {
+      res.status(404).send(`The cart with the ID ${id} was not found.`);
+    }
+  } catch (error) {
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
@@ -27,31 +39,46 @@ router.post("/", async (req, res) => {
     res
       .status(200)
       .send(
-        `The cart was successfully created. It contains the ID ${newCart.id}`
+        `The cart was successfully created.\n${JSON.stringify(newCart)}`
       );
   } catch (error) {
-    res.status(500).send({
-      message:
-        "There was been an error with the server. Please try again later.",
-      exception: error.stack,
-    });
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
 router.put("/:cid/product/:pid", async (req, res) => {
   const cartId = req.params.cid;
   const productId = req.params.pid;
-  const updatedCart = await cartManager.addProductToCart(cartId, productId);
-  if (updatedCart) {
-    res.status(200).send(`The product was successfully added to the cart.`);
-  } else {
-    res.status(404);
-    res.send(`Please enter a valid cart ID and / or a valid product ID.`);
+  for (const id of [cartId, productId]){
+    if (!mongoose.isValidObjectId(id)) {
+      res.status(400).send("Please enter a valid ID with its proper format");
+      return;
+    }
+  }
+  try {
+    const dbOperationResult = await cartManager.addProductToCart(cartId, productId);
+    if (dbOperationResult.matchedCount >= 1) {
+      res.status(200).send("The product was added successfully to the cart.");
+      return;
+    } else {
+      res
+        .status(404)
+        .send(
+          `No matching product or cart was found (cart ID: ${cartId} --  product ID: ${productId}). It was not be modified.`
+        );
+      return;
+    }
+  } catch (error) {
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    res.status(400).send("Please enter a valid ID with its proper format");
+    return;
+  }
   try {
     const dbOperationResult = await cartManager.deleteCart(id);
     if (dbOperationResult.deletedCount >= 1) {
@@ -66,11 +93,7 @@ router.delete("/:id", async (req, res) => {
       return;
     }
   } catch (error) {
-    res.status(500).send({
-      message:
-        "There was been an error with the server. Please try again later.",
-      exception: error.stack,
-    });
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 

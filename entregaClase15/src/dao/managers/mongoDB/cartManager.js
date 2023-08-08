@@ -7,11 +7,15 @@ class CartManager {
   }
 
   async getCartById(id) {
-    const matchedCart = await cartsModel.find({ _id: id });
+    const matchedCart = await cartsModel.findOne({ _id: id });
+    console.debug("matchedCart", matchedCart);
     if (matchedCart) {
-      process.env.VERBOSE && console.log(
-        `The cart that matched the id ${id} is:\n${JSON.stringify(matchedCart)}`
-      );
+      process.env.VERBOSE &&
+        console.log(
+          `The cart that matched the id ${id} is:\n${JSON.stringify(
+            matchedCart
+          )}`
+        );
       return matchedCart;
     } else {
       console.error(`No cart was found with the id ${id}`);
@@ -20,7 +24,8 @@ class CartManager {
 
   async addCart(cart) {
     const newCart = await cartsModel.create(cart);
-    process.env.VERBOSE && console.log("The cart has been successfully saved on the Database");
+    process.env.VERBOSE &&
+      console.log("The cart has been successfully saved on the Database");
     return newCart;
   }
 
