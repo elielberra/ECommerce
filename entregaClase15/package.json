@@ -9,7 +9,9 @@
     "seed": "node ./src/scripts/seedProducts.js",
     "seed:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/seedProducts.js",
     "delete:products": "node ./src/scripts/deleteCollection.js products",
-    "delete:chatmessages": "node ./src/scripts/deleteCollection.js chatmessages"
+    "delete:products:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js products",
+    "delete:chatmessages": "node ./src/scripts/deleteCollection.js chatmessages",
+    "delete:chatmessages:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js chatmessages"
   },
   "author": "",
   "license": "ISC",

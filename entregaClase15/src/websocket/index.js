@@ -9,15 +9,13 @@ async function socketHandler(socket) {
   socket.emit("load-chat-messages", previousMessages);
 
   socket.on("user-action", ({ user, action }) => {
-    
     if (action === "joined") {
         socket.user = user
     }
     socket.broadcast.emit("user-action-render", { user, action });
   });
 
-  socket.on("new-message", async (message) => {
-    
+  socket.on("new-message", async (message)=> {
     await chatMessageManager.addMessage(message);
     socket.broadcast.emit('new-message-render', message)
   });
