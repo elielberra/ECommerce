@@ -17,7 +17,10 @@ async function connectToDatabase() {
   if (process.env.DB_ENVIRONMENT === "local") {
     mongoURI = `mongodb://localhost:${process.env.MONGO_LOCAL_PORT}/`;
   } else if (process.env.DB_ENVIRONMENT === "atlas") {
-    mongoURI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER_NAME}.${process.env.MONGO_CLUSTER_ID}.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
+    mongoURI =
+      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}` +
+      `@${process.env.MONGO_CLUSTER_NAME}.${process.env.MONGO_CLUSTER_ID}` +
+      `.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
   } else {
     throw new Error(`${process.env.DB_ENVIRONMENT} is not a valid environment`);
   }
