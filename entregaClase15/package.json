@@ -1,8 +1,8 @@
 {
-  "name": "clase06",
+  "name": "ecommerce",
   "version": "1.0.0",
-  "description": "API for retrieving products",
-  "main": "app.js",
+  "description": "Web App for buting products and using a chatroom",
+  "main": "src/server.js",
   "scripts": {
     "start": "cross-env DB_ENVIRONMENT=atlas nodemon ./src/server.js",
     "start:verbose": "cross-env DB_ENVIRONMENT=atlas VERBOSE=true nodemon ./src/server.js",
@@ -15,7 +15,7 @@
     "delete:chatmessages": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/deleteCollection.js chatmessages",
     "delete:chatmessages:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js chatmessages"
   },
-  "author": "",
+  "author": "Eliel Berra",
   "license": "ISC",
   "dependencies": {
     "cross-env": "^7.0.3",
