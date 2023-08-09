@@ -1,8 +1,8 @@
+const mongoose = require("mongoose");
 const { connectToDatabase } = require("../utils");
 
-connectToDatabase();
-
 async function deleteCollection(collection) {
+  connectToDatabase();
   let dbOperationResult = "";
   if (collection === "products") {
     const productModel = require("../dao/models/productModel");
@@ -20,6 +20,7 @@ async function deleteCollection(collection) {
     `The result of trying to delete the collection ${collection} from MongoDB was`,
     dbOperationResult
   );
+  mongoose.connection.close();
 }
 
 const collection = process.argv[2];
