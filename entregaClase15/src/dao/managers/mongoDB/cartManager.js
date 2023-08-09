@@ -47,7 +47,6 @@ class CartManager {
   }
 
   async deleteCart(id) {
-    process.env.VERBOSE && console.log(`Deleting the cart with id ${id}`);
     const dbOperationResult = await cartsModel.deleteOne({ _id: id });
     return dbOperationResult;
   }

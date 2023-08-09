@@ -59,7 +59,6 @@ app.use("/", homeRouter);
 app.use("/api", apiRouter);
 app.use("/chat", chatRouter);
 
-
 // Configure Request listener of the Server
 server.listen(process.env.SERVER_PORT, () =>
   process.env.VERBOSE && console.log(`Local server listening on port ${process.env.SERVER_PORT}`)

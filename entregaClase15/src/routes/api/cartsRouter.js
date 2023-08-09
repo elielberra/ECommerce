@@ -5,7 +5,6 @@ const cartManager = require("../../dao/managers/mongoDB/cartManager");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  process.env.VERBOSE && console.log("Retrieving carts");
   try {
     const carts = await cartManager.getCarts();
     res.status(200).send(carts);

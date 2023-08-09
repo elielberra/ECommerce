@@ -28,26 +28,6 @@ class ProductManager {
     }
   }
 
-  validateReqFields(product) {
-    const mandatoryFields = [
-      "title",
-      "description",
-      "code",
-      "price",
-      "status",
-      "stock",
-      "keywords",
-    ];
-    for (const mandatoryField of mandatoryFields) {
-      if (!(mandatoryField in product)) {
-        throw new Error(
-          `Please insert the mandatory field '${mandatoryField}' for creating a product`
-        );
-      }
-    }
-    process.env.VERBOSE && console.log("All the required fields were entered");
-  }
-
   async validateCodeUnique(product) {
     const existingCodes = await productsModel.distinct("code");
     process.env.VERBOSE && console.log("Validating if the code is unique");
@@ -62,10 +42,9 @@ class ProductManager {
 
   async addProduct(product) {
     try {
-      // this.validateReqFields(product);
       this.validateCodeUnique(product);
     } catch (error) {
-      process.env.VERBOSE && console.log(error.message);
+      console.error(error.message);
       throw error;
     }
     process.env.VERBOSE && console.log("A new product will be added. The new product is:\n", product);
@@ -82,7 +61,7 @@ class ProductManager {
       );
       return dbOperationResult;
     } catch (error) {
-      process.env.VERBOSE && console.log(`No matching product was found with the id ${id}`);
+      console.error(`No matching product was found with the id ${id}`);
     }
   }
 

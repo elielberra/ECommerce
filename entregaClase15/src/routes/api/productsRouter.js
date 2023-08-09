@@ -5,7 +5,6 @@ const productManager = require("../../dao/managers/mongoDB/productManager");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  process.env.VERBOSE && console.log("Retrieving products");
   let { limit } = req.query;
   if (limit) {
     limit = parseInt(limit);
