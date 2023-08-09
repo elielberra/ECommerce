@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const mongoose = require("mongoose");
 const productManager = require("../../dao/managers/mongoDB/productManager");
+const ProductCodeExistsError = require("../../errors");
 
 const router = Router();
 
@@ -47,12 +48,26 @@ router.post("/", async (req, res) => {
   const { body: product } = req;
   try {
     const newProduct = await productManager.addProduct(product);
-    res.status(201).send(`The product was succesfully created.\n${JSON.stringify(newProduct)}`);
+    res
+      .status(201)
+      .send(
+        `The product was succesfully created.\n${JSON.stringify(newProduct)}`
+      );
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      res.status(400).send(`The product needs all of its required fields to be created.\n${error}`);
+      res
+        .status(400)
+        .send(
+          `The product needs all of its required fields to be created.\n${error}`
+        );
+    } else if (error instanceof ProductCodeExistsError) {
+      res
+        .status(400)
+        .send(`The product's code already exists. Insert a new one\n${error}`);
     } else {
-    res.status(500).send(`There was been an error with the server.\n${error}`);
+      res
+        .status(500)
+        .send(`There was been an error with the server.\n${error}`);
     }
   }
 });

@@ -1,4 +1,5 @@
 const productsModel = require("../../models/productModel");
+const ProductCodeExistsError = require("../../../errors")
 
 class ProductManager {
   async getProducts(limit_size) {
@@ -32,7 +33,7 @@ class ProductManager {
     const existingCodes = await productsModel.distinct("code");
     process.env.VERBOSE && console.log("Validating if the code is unique");
     if (existingCodes.includes(product.code)) {
-      throw new Error(
+      throw new ProductCodeExistsError(
         "The product's code already exists, therefore, the product will NOT be added to the list"
       );
     } else {
@@ -42,8 +43,9 @@ class ProductManager {
 
   async addProduct(product) {
     try {
-      this.validateCodeUnique(product);
+      await this.validateCodeUnique(product);
     } catch (error) {
+      console.debug("INSIDE addProduct")
       console.error(error.message);
       throw error;
     }
