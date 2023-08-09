@@ -62,8 +62,7 @@ class ProductManager {
 
   async addProduct(product) {
     try {
-      
-      this.validateReqFields(product);
+      // this.validateReqFields(product);
       this.validateCodeUnique(product);
     } catch (error) {
       process.env.VERBOSE && console.log(error.message);
@@ -88,7 +87,6 @@ class ProductManager {
   }
 
   async deleteProduct(id) {
-    process.env.VERBOSE && console.log(`Deleting the product with id ${id}`);
     const dbOperationResult = await productsModel.deleteOne({ _id: id });
     return dbOperationResult;
   }

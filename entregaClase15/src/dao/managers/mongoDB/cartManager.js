@@ -8,7 +8,6 @@ class CartManager {
 
   async getCartById(id) {
     const matchedCart = await cartsModel.findOne({ _id: id });
-    console.debug("matchedCart", matchedCart);
     if (matchedCart) {
       process.env.VERBOSE &&
         console.log(

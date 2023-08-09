@@ -1,4 +1,4 @@
-#page-container {
+#page_container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -95,7 +95,7 @@
 }
 
 @media (max-width: 600px) {
-  #page-container {
+  #page_container {
     max-width: 90%;
   }
 }

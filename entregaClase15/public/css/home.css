@@ -1,10 +1,10 @@
-#page-container {
+#page_container {
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid #005cbf;
 }
 
-#page-title {
+#page_title {
   margin: 0;
   color: #005cbf;
 }

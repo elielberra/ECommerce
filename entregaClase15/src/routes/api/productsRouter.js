@@ -37,7 +37,7 @@ router.get("/:id", async (req, res) => {
     if (product) {
       res.status(200).send(product);
     } else {
-      res.status(404).send(`The product with the ID ${id} was not found.`);
+      res.status(404).send(`The product with the ID ${id} was not found`);
     }
   } catch (error) {
     res.status(500).send(`There was been an error with the server.\n${error}`);
@@ -50,7 +50,11 @@ router.post("/", async (req, res) => {
     const newProduct = await productManager.addProduct(product);
     res.status(201).send(`The product was succesfully created.\n${JSON.stringify(newProduct)}`);
   } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      res.status(400).send(`The product needs all of its required fields to be created.\n${error}`);
+    } else {
     res.status(500).send(`There was been an error with the server.\n${error}`);
+    }
   }
 });
 
@@ -64,13 +68,13 @@ router.put("/:id", async (req, res) => {
   try {
     const dbOperationResult = await productManager.updateProduct(id, product);
     if (dbOperationResult.matchedCount >= 1) {
-      res.status(200).send("The product was updated successfully.");
+      res.status(200).send("The product was updated successfully");
       return;
     } else {
       res
         .status(404)
         .send(
-          `No matching product was found with the ID ${id}. It was not be modified.`
+          `No matching product was found with the ID ${id}. It was not be modified`
         );
       return;
     }

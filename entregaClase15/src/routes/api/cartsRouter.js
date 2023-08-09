@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
     if (cart) {
       res.status(200).send(cart);
     } else {
-      res.status(404).send(`The cart with the ID ${id} was not found.`);
+      res.status(404).send(`The cart with the ID ${id} was not found`);
     }
   } catch (error) {
     res.status(500).send(`There was been an error with the server.\n${error}`);
@@ -58,13 +58,13 @@ router.put("/:cid/product/:pid", async (req, res) => {
   try {
     const dbOperationResult = await cartManager.addProductToCart(cartId, productId);
     if (dbOperationResult.matchedCount >= 1) {
-      res.status(200).send("The product was added successfully to the cart.");
+      res.status(200).send("The product was added successfully to the cart");
       return;
     } else {
       res
         .status(404)
         .send(
-          `No matching product or cart was found (cart ID: ${cartId} --  product ID: ${productId}). It was not be modified.`
+          `No matching product or cart was found (cart ID: ${cartId} --  product ID: ${productId}). It was not modified`
         );
       return;
     }
@@ -88,7 +88,7 @@ router.delete("/:id", async (req, res) => {
       res
         .status(404)
         .send(
-          `No matching cart was found with the ID ${id}. It can't be modified.`
+          `No matching cart was found with the ID ${id}. It can't be modified`
         );
       return;
     }
