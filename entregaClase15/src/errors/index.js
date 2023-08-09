@@ -1,8 +1,8 @@
-class ProductCodeExistsError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "ProductCodeExistsError";
-  }
+class ProductsCodeExistsError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'ProductsCodeExistsError';
+    }
 }
 
-module.exports = ProductCodeExistsError;
+module.exports = ProductsCodeExistsError;
