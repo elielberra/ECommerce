@@ -14,20 +14,24 @@ class ProductManager {
   }
 
   async getPaginatedProducts(limit = 10, page = 1, query = {}, sortDirection) {
-    // if (sort) {
-    //   const sort = {price: sort}
-    // }
     const sort = sortDirection ? { price: sortDirection } : null;
     const options = { limit, page, sort };
     try {
-      const { docs: paginatedProducts, ...paginationStats } = await productsModel.paginate(
-        query,
-        options
-      );
-      // console.debug("paginationStats", paginationStats);
-      const paginatedProductsTitles = paginatedProducts.map(product => product.title).join(", ");
-      // process.env.VERBOSE && console.log(`The paginated products are: ${paginatedProductsTitles}`);
-      return paginatedProducts;
+      const dbOperationResult = await productsModel.paginate(query, options);
+      const paginatedProductsTitles = dbOperationResult.docs
+        .map(product => product.title)
+        .join(", ");
+      process.env.VERBOSE && console.log(`The paginated products are: ${paginatedProductsTitles}`);
+      return dbOperationResult;
+    } catch (error) {
+      console.error("Error while trying to get the products:\n", error);
+    }
+  }
+
+  async getCategories() {
+    try {
+      const categories = await productsModel.distinct("category");
+      return categories;
     } catch (error) {
       console.error("Error while trying to get the products:\n", error);
     }

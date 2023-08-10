@@ -69,6 +69,7 @@ Swal.fire({
   },
   confirmButtonText: "Send",
   allowOutsideClick: false,
+  allowEscapeKey : false,
   preConfirm: username => {
     if (!username) {
       Swal.showValidationMessage("The username cannot be blank");

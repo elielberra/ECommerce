@@ -1,4 +1,13 @@
 <div id="page_container">
+  <div id="filters">
+  <h3>Filters</h3>
+  <select id="category_filter">
+    <option value="all">All Categories</option>
+    {{#each categories}}
+      <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+</div>
   <div id="products">
     {{#each products}}
       <div>
@@ -9,6 +18,7 @@
           <div>
             <h3>{{this.title}}</h3>
             <h5>u$D {{this.price}}</h5>
+            <h3>{{this.category}}</h3>
             {{#each this.keywords}}
               <span>{{this}}</span>
             {{/each}}
@@ -18,5 +28,16 @@
         </div>
       </div>
     {{/each}}
+  </div>
+  <div id="pagination">
+    {{#if pageInfo.hasPrevPage}}
+      <a href={{pageInfo.prevLink}}>&lt; Previous</a>
+    {{/if}}
+    <p id="pages_info"><span id="current_page">{{pageInfo.page}}</span>
+      of
+      <span id="total_pages">{{pageInfo.totalPages}}</span></p>
+    {{#if pageInfo.hasNextPage}}
+      <a href={{pageInfo.nextLink}}>Next&gt;</a>
+    {{/if}}
   </div>
 </div>

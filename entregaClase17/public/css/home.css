@@ -4,46 +4,36 @@
   border-bottom: 1px solid #005cbf;
 }
 
-#page_title {
-  margin: 0;
-  color: #005cbf;
+#pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%; /* Set a fixed width to keep the layout consistent */
 }
 
-#discount-banner-container {
-  text-align: center;
-  padding: 20px 0;
+#pagination a {
+  color: #0077cc;
+  text-decoration: none;
+  margin: 0 5px;
 }
 
-#discount-banner {
-  width: 80%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 10px;
-  background-color: #cce6ff;
-  border: 1px solid #005cbf;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+#pagination p {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
 }
 
-#discount-product-information {
-  text-align: center;
-}
-
-#discount-product-information span {
-  display: block;
-}
-
-#discount-banner-container button {
+#current_page {
   background-color: #005cbf;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin: 0 5px;
 }
 
-#discount-banner-container button:hover {
-  background-color: #0077cc;
+#total_pages {
+  margin: 0 5px;
 }
 
 #products {

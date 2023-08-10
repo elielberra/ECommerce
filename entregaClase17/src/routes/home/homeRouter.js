@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const productManager = require("../../dao/managers/mongoDB/productManager");
+const productsModel = require("../../dao/models/productModel");
 
 const router = Router();
 router.get("/", async (req, res) => {
@@ -21,7 +22,6 @@ router.get("/", async (req, res) => {
   }
   if (query) {
     query = decodeURIComponent(query);
-    console.debug("QUERY", query);
     try {
       query = JSON.parse(query);
     } catch (error) {
@@ -32,8 +32,6 @@ router.get("/", async (req, res) => {
         );
       return;
     }
-    console.debug("QUERY AFTER JSON PARSE", query);
-    console.debug("QUERY TYPE", typeof query);
     if (typeof query !== "object") {
       res
         .status(400)
@@ -44,21 +42,34 @@ router.get("/", async (req, res) => {
     }
   }
   if (sort) {
-    console.debug("SORT before decode", sort)
-    sort = decodeURIComponent(sort);
-    console.debug("SORT after decode", sort)
-    sort = parseInt(sort);
-    if (!Number.isInteger(sort) || ![-1, 1].includes(sort)) {
+    sortInt = parseInt(sort);
+    if (!Number.isInteger(sortInt) || ![-1, 1].includes(sortInt)) {
       res
         .status(400)
-        .send(
-          `The query parameter sort ${sort} is invalid. It should be either 1 or -1`
-        );
+        .send(`The query parameter sort ${sort} is invalid. It should be either 1 or -1`);
       return;
     }
   }
-  const products = await productManager.getPaginatedProducts(limit, page, query, sort);
   const isAdminBoolean = req.user.role === "admin";
+  const { docs: products, ...pageInfo } = await productManager.getPaginatedProducts(
+    limit,
+    page,
+    query,
+    sort
+  );
+  const pageBaseURL = `http://localhost:${process.env.SERVER_PORT}/?`;
+  const limitParamURL = limit ? `&limit=${limit}` : "";
+  // const pageParamURL = page ? `&page=${page}` : "";
+  const queryParamURL = query ? `&query=${query}` : "";
+  const sortParamURL = sort ? `&sort=${sort}` : "";
+  pageInfo.prevLink = pageInfo.hasPrevPage
+    ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.prevPage}${queryParamURL}${sortParamURL}`
+    : "";
+  pageInfo.nextLink = pageInfo.hasNextPage
+    ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.nextPage}${queryParamURL}${sortParamURL}`
+    : "";
+  console.debug("products", products);
+  const categories = await productManager.getCategories();
   res.render("home", {
     products,
     user: {
@@ -66,7 +77,9 @@ router.get("/", async (req, res) => {
       isAdmin: isAdminBoolean
     },
     jsFilename: "home",
-    styleFilename: "home"
+    styleFilename: "home",
+    pageInfo,
+    categories
   });
 });
 
