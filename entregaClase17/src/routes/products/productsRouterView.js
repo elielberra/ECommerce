@@ -42,8 +42,7 @@ router.get("/", async (req, res) => {
   }
   if (sort) {
     sortInt = parseInt(sort);
-    const sortingOptions = [-1, 1];
-    if (!Number.isInteger(sortInt) || !sortingOptions.includes(sortInt)) {
+    if (!Number.isInteger(sortInt) || ![-1, 1].includes(sortInt)) {
       res
         .status(400)
         .send(`The query parameter sort ${sort} is invalid. It should be either 1 or -1`);
@@ -61,7 +60,7 @@ router.get("/", async (req, res) => {
     res.status(404).send(`The page ${page} does not exist`);
     return;
   }
-
+  console.debug(pageInfo);
   const pageBaseURL = `http://localhost:${process.env.SERVER_PORT}/?`;
   const limitParamURL = limit ? `&limit=${limit}` : "";
   const queryParamURL = query ? `&query=${query}` : "";
@@ -72,14 +71,19 @@ router.get("/", async (req, res) => {
   pageInfo.nextLink = pageInfo.hasNextPage
     ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.nextPage}${queryParamURL}${sortParamURL}`
     : "";
-  const { limit: pageInfoLimit, totalDocs, pagingCounter, ...reducedPageInfo} = pageInfo
-  const jsonResponse = {
-    status: "success",
-    payload: products,
-    ...reducedPageInfo
-  };
-  console.debug(jsonResponse);
-  res.status(200).send(jsonResponse);
+  console.debug("products", products);
+  const categories = await productManager.getCategories();
+  res.render("products", {
+    products,
+    user: {
+      ...req.user,
+      isAdmin: isAdminBoolean
+    },
+    jsFilename: "products",
+    styleFilename: "products",
+    pageInfo,
+    categories
+  });
 });
 
 module.exports = router;

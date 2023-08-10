@@ -8,6 +8,7 @@ const { connectToDatabase } = require("./utils");
 const { homeRouter } = require("./routes");
 const { apiRouter } = require("./routes");
 const { chatRouter } = require("./routes");
+const { productsRouter } = require("./routes");
 const socketHandler = require("./websocket");
 
 // Connect with MongoDB
@@ -58,6 +59,7 @@ app.use((req, res, next) => {
 app.use("/", homeRouter);
 app.use("/api", apiRouter);
 app.use("/chat", chatRouter);
+app.use("/products", productsRouter);
 
 // Configure Request listener of the Server
 server.listen(
