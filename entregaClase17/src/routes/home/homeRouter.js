@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const productManager = require("../../dao/managers/mongoDB/productManager");
-const productsModel = require("../../dao/models/productModel");
 
 const router = Router();
 router.get("/", async (req, res) => {
@@ -57,9 +56,13 @@ router.get("/", async (req, res) => {
     query,
     sort
   );
+  if (page > pageInfo.totalPages) {
+    res.status(404).send(`The page ${page} does not exist`);
+    return;
+  }
+  console.debug(pageInfo);
   const pageBaseURL = `http://localhost:${process.env.SERVER_PORT}/?`;
   const limitParamURL = limit ? `&limit=${limit}` : "";
-  // const pageParamURL = page ? `&page=${page}` : "";
   const queryParamURL = query ? `&query=${query}` : "";
   const sortParamURL = sort ? `&sort=${sort}` : "";
   pageInfo.prevLink = pageInfo.hasPrevPage

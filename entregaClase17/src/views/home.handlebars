@@ -1,17 +1,21 @@
 <div id="page_container">
   <div id="filters">
     <h3>Filters</h3>
-    <select id="category_filter" class="filter">
-      <option value="all">All Categories</option>
-      {{#each categories}}
-        <option value="{{this}}">{{this}}</option>
-      {{/each}}
-    </select>
-    <select id="price_filter" class="filter">
-      <option value="">Order price</option>
-      <option value="1">ascending</option>
-      <option value="-1">descending</option>
-    </select>
+    <label>Category
+      <select id="category_filter" class="filter">
+        <option value="">all</option>
+        {{#each categories}}
+          <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <label>Order price by
+      <select id="price_filter" class="filter">
+        <option value="">none</option>
+        <option value="1">ascending</option>
+        <option value="-1">descending</option>
+      </select>
+    </label>
   </div>
   <div id="products">
     {{#each products}}
