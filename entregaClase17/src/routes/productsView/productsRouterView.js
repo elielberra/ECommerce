@@ -58,7 +58,8 @@ router.get("/", async (req, res) => {
     query,
     sort
   );
-  console.debug("type of products instance of mongoose", products instanceof mongoose.Query || products instanceof mongoose.Aggregate);
+  console.debug("is instance  of mongoose", (products instanceof mongoose.Query || products instanceof mongoose.Aggregate))
+    
   if (page > pageInfo.totalPages) {
     res.status(404).send(`The page ${page} does not exist`);
     return;

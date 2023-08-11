@@ -14,7 +14,6 @@ router.get("/:id", async (req, res) => {
     const cart = await cartManager.getCartById(id, true);
     if (cart) {
       const isAdminBoolean = req.user.role === "admin";
-      console.debug("entering cart:id route")
       const productsInCart = cart.products;
       const numProductsInCart = cart.products.length;
       res.render("productsInCart", {

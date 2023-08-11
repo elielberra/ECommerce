@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const mongoose = require("mongoose");
 const productManager = require("../../dao/managers/mongoDB/productManager");
-const ProductsCodeExistsError = require("../../errors");
+const { ProductsCodeExistsError } = require("../../errors");
 
 const router = Router();
 
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
     if (error instanceof mongoose.Error.ValidationError) {
       res.status(400).send(`The product needs all of its required fields to be created.\n${error}`);
     } else if (error instanceof ProductsCodeExistsError) {
-      res.status(400).send(`The product's code already exists. Insert a new one\n${error}`);
+      res.status(400).send(error.message);
     } else {
       res.status(500).send(`There was been an error with the server.\n${error}`);
     }
