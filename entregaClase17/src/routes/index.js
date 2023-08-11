@@ -3,7 +3,8 @@ const HomeRouter = require("./home/homeRouter");
 const ProductsRouter = require("./api/productsRouter");
 const CartsRouter = require("./api/cartsRouter");
 const ChatRouter = require("./chat/chatRouter");
-const ProductsRouterView = require("./products/productsRouterView");
+const ProductsRouterView = require("./productsView/productsRouterView");
+const CartsRouterView = require("./cartsView/cartsRouterView");
 
 // Router for the home page
 const homeRouter = Router();
@@ -19,12 +20,17 @@ const chatRouter = Router();
 chatRouter.use("/", ChatRouter);
 
 // Router for the products
-const productsRouter = Router();
-productsRouter.use("/", ProductsRouterView);
+const productsRouterView = Router();
+productsRouterView.use("/", ProductsRouterView);
+
+// Router for the carts
+const cartsRouterView = Router();
+cartsRouterView.use("/", CartsRouterView);
 
 module.exports = {
   homeRouter,
   apiRouter,
   chatRouter,
-  productsRouter
+  productsRouterView,
+  cartsRouterView
 };

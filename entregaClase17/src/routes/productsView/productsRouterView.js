@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const productManager = require("../../dao/managers/mongoDB/productManager");
+const cartManager = require("../../dao/managers/mongoDB/cartManager");
 
 const router = Router();
 router.get("/", async (req, res) => {
@@ -71,6 +72,8 @@ router.get("/", async (req, res) => {
     ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.nextPage}${queryParamURL}${sortParamURL}`
     : "";
   const categories = await productManager.getCategories();
+  const cart = await cartManager.getCartById(req.cartId);
+  const numProductsInCart = cart.products.length;
   res.render("products", {
     products,
     user: {
@@ -81,7 +84,8 @@ router.get("/", async (req, res) => {
     styleFilename: "products",
     pageInfo,
     categories,
-    cartId: req.cartId
+    cartId: req.cartId,
+    numProductsInCart,
   });
 });
 

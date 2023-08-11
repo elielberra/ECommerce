@@ -8,7 +8,8 @@ const { connectToDatabase } = require("./utils");
 const { homeRouter } = require("./routes");
 const { apiRouter } = require("./routes");
 const { chatRouter } = require("./routes");
-const { productsRouter } = require("./routes");
+const { productsRouterView } = require("./routes");
+const { cartsRouterView } = require("./routes");
 const socketHandler = require("./websocket");
 const cartManager = require("./dao/managers/mongoDB/cartManager");
 
@@ -63,7 +64,6 @@ app.use(async (req, res, next) => {
   const filter = {user: userOfCart}
   const cart = await cartManager.getCart(filter);
   req.cartId = cart._id;
-  console.debug("req.cartId", req.cartId);
   next();
 });
 
@@ -71,7 +71,8 @@ app.use(async (req, res, next) => {
 app.use("/", homeRouter);
 app.use("/api", apiRouter);
 app.use("/chat", chatRouter);
-app.use("/products", productsRouter);
+app.use("/products", productsRouterView);
+app.use("/carts", cartsRouterView);
 
 // Configure Request listener of the Server
 server.listen(

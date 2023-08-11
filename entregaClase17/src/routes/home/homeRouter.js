@@ -78,7 +78,6 @@ router.get("/", async (req, res) => {
     payload: products,
     ...reducedPageInfo
   };
-  console.debug(jsonResponse);
   res.status(200).send(jsonResponse);
 });
 

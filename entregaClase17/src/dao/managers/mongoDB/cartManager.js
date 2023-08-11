@@ -29,7 +29,6 @@ class CartManager {
   }
 
   async addProductToCart(cartId, productId) {
-    // products population is missing, this method will not work
     const cart = await this.getCartById(cartId);
     if (!cart) {
       throw new Error("Cart not found");
