@@ -18,7 +18,7 @@ if (sort) {
 const categorySelectedHandler = () => {
   const params = new URL(document.location).searchParams;
   const limitParamURL = limit ? `&limit=${params.get("limit")}` : "";
-  const pageParamURL = page ? `&page=${params.get("page")}` : "";
+  const pageParamURL = "&page=1";
   const selectedCategory = categoryFilter.value;
   const queryParamURL = selectedCategory
     ? `&query=${encodeURIComponent(`{"category":"${selectedCategory}"}`)}`
@@ -42,3 +42,12 @@ categoryFilter.addEventListener("change", categorySelectedHandler);
 
 const priceFilter = document.getElementById("price_filter");
 priceFilter.addEventListener("change", priceSelectedHandler);
+
+const socket = io();
+function handleProductAddedToCart(cartId, productId) {
+  socket.emit("product-added-to-cart", { cartId, productId });
+}
+const cartBadge = document.getElementById("cart_badge");
+socket.on("update-cart-badge", numProductsInCart => {
+  cartBadge.innerHTML = numProductsInCart;
+});

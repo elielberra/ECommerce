@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
+  background-color: #eef4fa;
   margin: 0;
   padding: 0;
 }
@@ -48,7 +48,7 @@ a:hover {
   background-color: #0077cc;
 }
 
-#cart-badge {
+#cart_badge {
   display: inline-block;
   margin-left: 5px;
   padding: 2px 5px;

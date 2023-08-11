@@ -60,8 +60,7 @@ router.get("/", async (req, res) => {
     res.status(404).send(`The page ${page} does not exist`);
     return;
   }
-  console.debug(pageInfo);
-  const pageBaseURL = `http://localhost:${process.env.SERVER_PORT}/?`;
+  const pageBaseURL = `http://localhost:${process.env.SERVER_PORT}/products/?`;
   const limitParamURL = limit ? `&limit=${limit}` : "";
   const queryParamURL = query ? `&query=${query}` : "";
   const sortParamURL = sort ? `&sort=${sort}` : "";
@@ -71,7 +70,6 @@ router.get("/", async (req, res) => {
   pageInfo.nextLink = pageInfo.hasNextPage
     ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.nextPage}${queryParamURL}${sortParamURL}`
     : "";
-  console.debug("products", products);
   const categories = await productManager.getCategories();
   res.render("products", {
     products,
@@ -82,7 +80,8 @@ router.get("/", async (req, res) => {
     jsFilename: "products",
     styleFilename: "products",
     pageInfo,
-    categories
+    categories,
+    cartId: req.cartId
   });
 });
 

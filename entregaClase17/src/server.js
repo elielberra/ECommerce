@@ -10,6 +10,7 @@ const { apiRouter } = require("./routes");
 const { chatRouter } = require("./routes");
 const { productsRouter } = require("./routes");
 const socketHandler = require("./websocket");
+const cartManager = require("./dao/managers/mongoDB/cartManager");
 
 // Connect with MongoDB
 connectToDatabase();
@@ -48,10 +49,21 @@ app.use("/static", express.static(staticDir));
 // Middleware for defaulting testing user with admin role
 app.use((req, res, next) => {
   req.user = {
-    id: 1,
+    id: "1",
     name: "Testing Admin User",
     role: "admin"
   };
+  next();
+});
+
+// Middleware for setting a cartId
+// The cartId will only be the same across different requests if there is only one cart on the DB
+app.use(async (req, res, next) => {
+  const userOfCart = req.user.id;
+  const filter = {user: userOfCart}
+  const cart = await cartManager.getCart(filter);
+  req.cartId = cart._id;
+  console.debug("req.cartId", req.cartId);
   next();
 });
 

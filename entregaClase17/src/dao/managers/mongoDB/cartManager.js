@@ -6,6 +6,11 @@ class CartManager {
     return carts;
   }
 
+  async getCart(filter) {
+    const cart = await cartsModel.findOne(filter);
+    return cart;
+  }
+
   async getCartById(id) {
     const matchedCart = await cartsModel.findOne({ _id: id });
     if (matchedCart) {
@@ -45,6 +50,8 @@ class CartManager {
     const dbOperationResult = await cartsModel.deleteOne({ _id: id });
     return dbOperationResult;
   }
+
+  async deleteProductFromCart(cartId, productId) {}
 }
 
 module.exports = new CartManager();

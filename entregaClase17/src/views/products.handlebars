@@ -19,23 +19,21 @@
   </div>
   <div id="products">
     {{#each products}}
-      <div>
-        <div>
+        <div class="product">
           <div>
-            <img alt="Photo of the product" />
+            <img class="product_image" alt="Photo of the product" />
           </div>
           <div>
-            <h3>{{this.title}}</h3>
-            <h5>u$D {{this.price}}</h5>
-            <h3>{{this.category}}</h3>
+            <p class="product_title">{{this.title}}</p>
+            <p class="product_price">u$D {{this.price}}</h5>
+            <p class="product_category">{{this.category}}</p>
             {{#each this.keywords}}
-              <span>{{this}}</span>
+              <span class="product_keywords">{{this}}</span>
             {{/each}}
-            <p>{{this.description}}</p>
-            <button onclick="addToCart({{this.id}})">Add to Cart</button>
+            <p class="product_description">{{this.description}}</p>
+            <button class="add_to_cart" onclick="handleProductAddedToCart('{{../cartId}}','{{this._id}}')">Add to Cart{{cartId}}</button>
           </div>
         </div>
-      </div>
     {{/each}}
   </div>
   <div id="pagination">
@@ -50,3 +48,5 @@
     {{/if}}
   </div>
 </div>
+<div style="display:none;">{{cartId}}</div>
+<div>HOLA{{cartId}}</div>

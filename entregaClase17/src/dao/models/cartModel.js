@@ -3,8 +3,8 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const leanHook = require("./hooks/leanHook");
 
 const cartSchema = new Schema({
-  //   user: { type: Schema.Types.ObjectId, ref: "users" },
-  user: Number,
+  //   user: { type: Schema.Types.ObjectId, required: true, ref: "users" },
+  user: {type: String, require: true},
   products: {
     type: [
       {
@@ -17,8 +17,7 @@ const cartSchema = new Schema({
   createdDate: { type: Number, default: Date.now() }
 });
 
-cartSchema.pre(["findOne", "find"], leanHook);
-cartSchema.plugin(mongoosePaginate);
+// cartSchema.pre(["findOne", "find"], leanHook);
 
 const cartsModel = model("carts", cartSchema);
 
