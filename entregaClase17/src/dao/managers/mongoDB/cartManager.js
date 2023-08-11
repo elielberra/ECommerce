@@ -3,7 +3,10 @@ const { ItemNotFoundError } = require("../../../errors");
 
 class CartManager {
   async getCarts() {
-    const carts = await cartsModel.find();
+    const carts = await cartsModel.find().populate({
+      path: "products.product",
+      select: ["title", "price", "category", "keywords", "description", "thumbnail"]
+    });
     return carts;
   }
 
@@ -47,7 +50,7 @@ class CartManager {
     const willReturnLeanObject = false;
     const cart = await this.getCartById(cartId, willReturnLeanObject);
     if (!cart) {
-      throw new Error("Cart not found");
+      throw new ItemNotFoundError(`The product with the id ${productId} not found`);
     }
     const existingProductIndex = cart.products.findIndex(
       product => product.product?._id?.toString() === productId
@@ -73,13 +76,12 @@ class CartManager {
     if (indexProductToUpdate === -1) {
       throw new ItemNotFoundError(`The product with the id ${productId} not found`);
     }
-    console.debug("product to update quantity", cart.products[indexProductToUpdate].quantity);
     cart.products[indexProductToUpdate].quantity = newQuantity;
     await cart.save();
     return cart;
   }
 
-  async deleteProductFromCart(cartId, productId) {
+  async deleteOneProductFromCart(cartId, productId) {
     const willReturnLeanObject = false;
     const cart = await this.getCartById(cartId, willReturnLeanObject);
     if (!cart) {
@@ -97,12 +99,16 @@ class CartManager {
     return cart;
   }
 
-  async deleteCart(id) {
-    const dbOperationResult = await cartsModel.deleteOne({ _id: id });
-    return dbOperationResult;
+  async deleteAllProductsFromCart(cartId) {
+    const willReturnLeanObject = false;
+    const cart = await this.getCartById(cartId, willReturnLeanObject);
+    if (!cart) {
+      throw new ItemNotFoundError(`The cart with the id ${cartId} not found`);
+    }
+    cart.products = [];
+    cart.save();
+    return cart;
   }
-
-  // async deleteProductFromCart(cartId, productId) {}
 }
 
 module.exports = new CartManager();

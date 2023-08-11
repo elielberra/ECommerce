@@ -65,6 +65,10 @@ router.put("/:cid/product/:pid", async (req, res) => {
       return;
     }
   } catch (error) {
+    if (error instanceof ItemNotFoundError) {
+      res.status(404).send(error.message);
+      return;
+    }
     res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
@@ -84,11 +88,15 @@ router.put("/:cid/products/:pid", async (req, res) => {
       return;
     }
   }
-  let { quantity: newQuantity} = req.body;
+  let { quantity: newQuantity } = req.body;
   console.log("newQuantity", newQuantity);
   if (!newQuantity) {
-    res.status(400).send("Insert on the body of the Request the new quantity" +
-                        "The format is '{\"quantity\": num}' and num must be a number  equal or higher than 1");
+    res
+      .status(400)
+      .send(
+        "Insert on the body of the Request the new quantity" +
+          "The format is '{\"quantity\": num}' and num must be a number  equal or higher than 1"
+      );
     return;
   }
   newQuantity = parseInt(newQuantity);
@@ -104,13 +112,37 @@ router.put("/:cid/products/:pid", async (req, res) => {
     if (error instanceof ItemNotFoundError) {
       res.status(404).send(error.message);
       return;
-    } else {
-      res.status(500).send(`There was been an error with the server.\n${error}`);
     }
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
 // Delete cart
+// This endpoint was replaced for the endpoint that deletes all the products of a cart
+// I think that this endpoint should not be deleted, it might be useful in the future
+// router.delete("/:cid", async (req, res) => {
+//   const { cid: cartId } = req.params;
+//   if (!mongoose.isValidObjectId(cartId)) {
+//     res.status(400).send("Please enter a valid ID with its proper format");
+//     return;
+//   }
+//   try {
+//     const dbOperationResult = await cartManager.deleteCart(cartId);
+//     if (dbOperationResult.deletedCount >= 1) {
+//       res.status(200).send("The cart was deleted successfully.");
+//       return;
+//     } else {
+//       res
+//         .status(404)
+//         .send(`No matching cart was found with the ID ${cartId}. It can't be modified`);
+//       return;
+//     }
+//   } catch (error) {
+//     res.status(500).send(`There was been an error with the server.\n${error}`);
+//   }
+// });
+
+// Delete all the products of a cart
 router.delete("/:cid", async (req, res) => {
   const { cid: cartId } = req.params;
   if (!mongoose.isValidObjectId(cartId)) {
@@ -118,22 +150,19 @@ router.delete("/:cid", async (req, res) => {
     return;
   }
   try {
-    const dbOperationResult = await cartManager.deleteCart(cartId);
-    if (dbOperationResult.deletedCount >= 1) {
-      res.status(200).send("The cart was deleted successfully.");
-      return;
-    } else {
-      res
-        .status(404)
-        .send(`No matching cart was found with the ID ${cartId}. It can't be modified`);
+    await cartManager.deleteAllProductsFromCart(cartId);
+    res.status(200).send("All the products were successfully removed from the cart");
+    return;
+  } catch (error) {
+    if (error instanceof ItemNotFoundError) {
+      res.status(404).send(error.message);
       return;
     }
-  } catch (error) {
     res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
-// Delete product from cart
+// Delete one single product from cart
 router.delete("/:cid/products/:pid", async (req, res) => {
   const { cid: cartId, pid: productId } = req.params;
   for (const id of [cartId, productId]) {
@@ -145,16 +174,15 @@ router.delete("/:cid/products/:pid", async (req, res) => {
     }
   }
   try {
-    await cartManager.deleteProductFromCart(cartId, productId);
+    await cartManager.deleteOneProductFromCart(cartId, productId);
     res.status(200).send("The product was successfully deleted from the cart");
     return;
   } catch (error) {
     if (error instanceof ItemNotFoundError) {
       res.status(404).send(error.message);
       return;
-    } else {
-      res.status(500).send(`There was been an error with the server.\n${error}`);
     }
+    res.status(500).send(`There was been an error with the server.\n${error}`);
   }
 });
 
