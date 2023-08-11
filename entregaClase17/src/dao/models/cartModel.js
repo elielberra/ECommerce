@@ -4,7 +4,7 @@ const leanHook = require("./hooks/leanHook");
 
 const cartSchema = new Schema({
   //   user: { type: Schema.Types.ObjectId, required: true, ref: "users" },
-  user: {type: String, require: true},
+  user: { type: String, require: true },
   products: {
     type: [
       {
@@ -17,7 +17,13 @@ const cartSchema = new Schema({
   createdDate: { type: Number, default: Date.now() }
 });
 
-// cartSchema.pre(["findOne", "find"], leanHook);
+// cartSchema.pre(["findOne", "find"], function (next) {
+//   this.populate({
+//     path: "products.product",
+//     select: "title", 
+//   });
+//   next();
+// });
 
 const cartsModel = model("carts", cartSchema);
 

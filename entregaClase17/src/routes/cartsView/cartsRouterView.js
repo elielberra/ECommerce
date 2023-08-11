@@ -14,9 +14,14 @@ router.get("/:id", async (req, res) => {
     const cart = await cartManager.getCartById(id);
     if (cart) {
       const isAdminBoolean = req.user.role === "admin";
+      // const cart = await cartManager.getCartById(req.cartId).populate({
+      //   path: "products.product",
+      //   select: "title"
+      // });
       const cart = await cartManager.getCartById(req.cartId);
+      // console.log("cart", cart)
       const productsInCart = cart.products;
-      console.debug("PRODUCTS IN CART",productsInCart )
+      console.log("productsInCart", productsInCart)
       const numProductsInCart = cart.products.length;
       res.render("productsInCart", {
         productsInCart,

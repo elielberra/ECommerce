@@ -12,7 +12,10 @@ class CartManager {
   }
 
   async getCartById(id) {
-    const matchedCart = await cartsModel.findOne({ _id: id });
+    const matchedCart = await cartsModel.findOne({ _id: id }).populate({
+        path: "products.product",
+        select: ["title", "price", "category", "keywords", "description", "thumbnail"]
+      }).lean();;
     if (matchedCart) {
       process.env.VERBOSE &&
         console.log(`The cart that matched the id ${id} is:\n${JSON.stringify(matchedCart)}`);

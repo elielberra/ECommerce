@@ -1,18 +1,20 @@
-<div id="products">
-    {{#each productsInCart}}
-        <div class="product">
-          <div>
-            <img class="product_image" alt="Photo of the product" />
+<div id="page_container">
+  <div id="products">
+      {{#each productsInCart}}
+          <div class="product">
+            <div>
+              <img class="product_image" alt="Photo of the product" />
+            </div>
+            <div>
+              <p class="product_title">{{this.product.title}}</p>
+              <p class="product_price">u$D {{this.product.price}}</h5>
+              <p class="product_category">{{this.product.category}}</p>
+              {{#each this.product.keywords}}
+                <span class="product_keywords">{{this}}</span>
+              {{/each}}
+              <p class="product_description">{{this.product.description}}</p>
+            </div>
           </div>
-          <div>
-            <p class="product_title">{{this.title}}</p>
-            <p class="product_price">u$D {{this.price}}</h5>
-            <p class="product_category">{{this.category}}</p>
-            {{#each this.keywords}}
-              <span class="product_keywords">{{this}}</span>
-            {{/each}}
-            <p class="product_description">{{this.description}}</p>
-          </div>
-        </div>
-    {{/each}}
+      {{/each}}
+  </div>
 </div>
