@@ -14,7 +14,7 @@ const productSchema = new Schema({
   createdDate: { type: Number, default: Date.now() }
 });
 
-productSchema.pre(["findOne", "find"], leanHook);
+// productSchema.pre(["find", "findOne"], leanHook);
 productSchema.plugin(mongoosePaginate);
 
 const productsModel = model("products", productSchema);

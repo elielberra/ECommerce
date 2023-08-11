@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const mongoose = require("mongoose");
 const productManager = require("../../dao/managers/mongoDB/productManager");
 const cartManager = require("../../dao/managers/mongoDB/cartManager");
 
@@ -57,6 +58,7 @@ router.get("/", async (req, res) => {
     query,
     sort
   );
+  console.debug("type of products instance of mongoose", products instanceof mongoose.Query || products instanceof mongoose.Aggregate);
   if (page > pageInfo.totalPages) {
     res.status(404).send(`The page ${page} does not exist`);
     return;

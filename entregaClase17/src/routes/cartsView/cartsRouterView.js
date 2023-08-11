@@ -11,17 +11,11 @@ router.get("/:id", async (req, res) => {
     return;
   }
   try {
-    const cart = await cartManager.getCartById(id);
+    const cart = await cartManager.getCartById(id, true);
     if (cart) {
       const isAdminBoolean = req.user.role === "admin";
-      // const cart = await cartManager.getCartById(req.cartId).populate({
-      //   path: "products.product",
-      //   select: "title"
-      // });
-      const cart = await cartManager.getCartById(req.cartId);
-      // console.log("cart", cart)
+      console.debug("entering cart:id route")
       const productsInCart = cart.products;
-      console.log("productsInCart", productsInCart)
       const numProductsInCart = cart.products.length;
       res.render("productsInCart", {
         productsInCart,
@@ -39,6 +33,7 @@ router.get("/:id", async (req, res) => {
     }
   } catch (error) {
     res.status(500).send(`There was been an error with the server.\n${error}`);
+    throw error;
   }
 });
 

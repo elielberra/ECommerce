@@ -15,7 +15,7 @@ class ProductManager {
 
   async getPaginatedProducts(limit = 10, page = 1, query = {}, sortDirection) {
     const sort = sortDirection ? { price: sortDirection } : null;
-    const options = { limit, page, sort };
+    const options = { limit, page, sort, lean: true };
     try {
       const dbOperationResult = await productsModel.paginate(query, options);
       const paginatedProductsTitles = dbOperationResult.docs

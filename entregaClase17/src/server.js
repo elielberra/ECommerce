@@ -58,7 +58,6 @@ app.use((req, res, next) => {
 });
 
 // Middleware for setting a cartId
-// The cartId will only be the same across different requests if there is only one cart on the DB
 app.use(async (req, res, next) => {
   const userOfCart = req.user.id;
   const filter = {user: userOfCart}

@@ -1,4 +1,5 @@
 const cartsModel = require("../../models/cartModel");
+const mongoose = require("mongoose");
 
 class CartManager {
   async getCarts() {
@@ -11,11 +12,30 @@ class CartManager {
     return cart;
   }
 
-  async getCartById(id) {
-    const matchedCart = await cartsModel.findOne({ _id: id }).populate({
+  async getCartById(id, lean) {
+    // const matchedCart = await cartsModel.findOne({ _id: id });
+    let matchedCart = null;
+    console.log(lean);
+    if (lean) {
+      console.debug("cartById is lean");
+      matchedCart = await cartsModel
+        .findOne({ _id: id })
+        .populate({
+          path: "products.product",
+          select: ["title", "price", "category", "keywords", "description", "thumbnail"]
+        })
+        .lean();
+    } else {
+      console.debug("cartById is NOT lean");
+      matchedCart = await cartsModel.findOne({ _id: id }).populate({
         path: "products.product",
         select: ["title", "price", "category", "keywords", "description", "thumbnail"]
-      }).lean();;
+      });
+    }
+    console.debug(
+      "matchedCart is instance of mongoose object:",
+      matchedCart instanceof mongoose.Query || matchedCart instanceof mongoose.Aggregate
+    );
     if (matchedCart) {
       process.env.VERBOSE &&
         console.log(`The cart that matched the id ${id} is:\n${JSON.stringify(matchedCart)}`);
@@ -32,7 +52,8 @@ class CartManager {
   }
 
   async addProductToCart(cartId, productId) {
-    const cart = await this.getCartById(cartId);
+    console.log("inside addProductToCarta")
+    const cart = await this.getCartById(cartId, false);
     if (!cart) {
       throw new Error("Cart not found");
     }
@@ -53,7 +74,7 @@ class CartManager {
     return dbOperationResult;
   }
 
-  async deleteProductFromCart(cartId, productId) {}
+  // async deleteProductFromCart(cartId, productId) {}
 }
 
 module.exports = new CartManager();
