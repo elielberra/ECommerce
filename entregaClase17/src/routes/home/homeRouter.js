@@ -4,16 +4,15 @@ const productManager = require("../../dao/managers/mongoDB/productManager");
 const router = Router();
 router.get("/", async (req, res) => {
   let { limit, page, query, sort } = req.query;
-  for (queryParam of [limit, page]) {
+  for (const queryParam of [limit, page]) {
     if (queryParam) {
-      queryParamInt = parseInt(queryParam);
+      const queryParamInt = parseInt(queryParam);
       if (!Number.isInteger(queryParamInt) || queryParamInt < 1) {
         res
           .status(400)
           .send(
-            `The query parameter ${
-              queryParam === limit ? "limit" : "page"
-            } ${queryParam} is invalid.` + `It should be an integer number equal or higher than 1`
+            `The query parameter ${queryParam === limit ? "limit" : "page"} ${queryParam}` +
+            ` is invalid. It should be an integer number equal or higher than 1`
           );
         return;
       }
@@ -35,13 +34,13 @@ router.get("/", async (req, res) => {
       res
         .status(400)
         .send(
-          `The query parameter query ${query} is invalid. It should be an object of shape: {"field": "value"}`
+          `The query parameter ${query} is invalid. It should be an object of shape: {"field": "value"}`
         );
       return;
     }
   }
   if (sort) {
-    sortInt = parseInt(sort);
+    const sortInt = parseInt(sort);
     const sortingOptions = [-1, 1];
     if (!Number.isInteger(sortInt) || !sortingOptions.includes(sortInt)) {
       res
@@ -50,7 +49,6 @@ router.get("/", async (req, res) => {
       return;
     }
   }
-  const isAdminBoolean = req.user.role === "admin";
   const { docs: products, ...pageInfo } = await productManager.getPaginatedProducts(
     limit,
     page,
@@ -72,7 +70,12 @@ router.get("/", async (req, res) => {
   pageInfo.nextLink = pageInfo.hasNextPage
     ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.nextPage}${queryParamURL}${sortParamURL}`
     : "";
-  const { limit: pageInfoLimit, totalDocs, pagingCounter, ...reducedPageInfo} = pageInfo
+  const {
+    limit: unusedLimit,
+    totalDocs: unusedTotalDocs,
+    pagingCounter: unusedPageCounter,
+    ...reducedPageInfo
+  } = pageInfo;
   const jsonResponse = {
     status: "success",
     payload: products,

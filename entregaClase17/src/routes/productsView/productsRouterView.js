@@ -1,14 +1,13 @@
 const { Router } = require("express");
-const mongoose = require("mongoose");
 const productManager = require("../../dao/managers/mongoDB/productManager");
 const cartManager = require("../../dao/managers/mongoDB/cartManager");
 
 const router = Router();
 router.get("/", async (req, res) => {
   let { limit, page, query, sort } = req.query;
-  for (queryParam of [limit, page]) {
+  for (const queryParam of [limit, page]) {
     if (queryParam) {
-      queryParamInt = parseInt(queryParam);
+      const queryParamInt = parseInt(queryParam);
       if (!Number.isInteger(queryParamInt) || queryParamInt < 1) {
         res
           .status(400)
@@ -43,7 +42,7 @@ router.get("/", async (req, res) => {
     }
   }
   if (sort) {
-    sortInt = parseInt(sort);
+    const sortInt = parseInt(sort);
     if (!Number.isInteger(sortInt) || ![-1, 1].includes(sortInt)) {
       res
         .status(400)
@@ -57,9 +56,7 @@ router.get("/", async (req, res) => {
     page,
     query,
     sort
-  );
-  console.debug("is instance  of mongoose", (products instanceof mongoose.Query || products instanceof mongoose.Aggregate))
-    
+  );   
   if (page > pageInfo.totalPages) {
     res.status(404).send(`The page ${page} does not exist`);
     return;

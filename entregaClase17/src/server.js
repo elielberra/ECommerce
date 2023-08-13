@@ -47,7 +47,7 @@ app.set("view engine", "handlebars");
 const staticDir = path.join(__dirname, "..", "public");
 app.use("/static", express.static(staticDir));
 
-// Middleware for defaulting testing user with admin role
+// Middleware for defaulting testing user with admin role and a hardcoded id
 app.use((req, res, next) => {
   req.user = {
     id: "1",
@@ -58,11 +58,18 @@ app.use((req, res, next) => {
 });
 
 // Middleware for setting a cartId
+// Since there are no Users at this stage of the project, the Cart of the User with the  harcoded id 1 will be used
 app.use(async (req, res, next) => {
   const userOfCart = req.user.id;
   const filter = {user: userOfCart}
-  const cart = await cartManager.getCart(filter);
-  req.cartId = cart._id;
+  try {
+    const cart = await cartManager.getCart(filter)
+    if (cart) {
+      req.cartId = cart._id;
+    }
+  } catch (error) {
+    res.status(500).send(`There was been an error with the server.\n${error}`);
+  }
   next();
 });
 

@@ -9,12 +9,12 @@ const productSchema = new Schema({
   price: { type: Number, required: true },
   status: { type: Boolean, required: true },
   stock: { type: Number, required: true, default: 0 },
+  category: { type: String, required: true },
   keywords: { type: [String], required: true },
   thumbnail: { type: String, default: "No thumbnail available" },
   createdDate: { type: Number, default: Date.now() }
 });
 
-// productSchema.pre(["find", "findOne"], leanHook);
 productSchema.plugin(mongoosePaginate);
 
 const productsModel = model("products", productSchema);
