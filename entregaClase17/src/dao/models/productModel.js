@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const leanHook = require("./hooks/leanHook");
 
 const productSchema = new Schema({
   title: { type: String, required: true },

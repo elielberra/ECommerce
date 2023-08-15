@@ -31,7 +31,7 @@
               <span class="product_keywords">{{this}}</span>
             {{/each}}
             <p class="product_description">{{this.description}}</p>
-            <button class="add_to_cart" onclick="handleProductAddedToCart('{{../cartId}}','{{this._id}}')">Add to Cart{{cartId}}</button>
+            <button class="product_action" onclick="handleProductAddedToCart('{{../cartId}}','{{this._id}}')">Add to Cart{{cartId}}</button>
           </div>
         </div>
     {{/each}}

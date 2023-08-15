@@ -11,7 +11,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "no-unused-vars":  ["warn", { "varsIgnorePattern": "^unused" }]
+    "no-unused-vars":  ["warn", { "varsIgnorePattern": ["^unused", "handleProductAddedToCart"] }]
   },
   "globals": {
     "io": "readonly",

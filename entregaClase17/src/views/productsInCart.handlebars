@@ -1,7 +1,7 @@
 <div id="page_container">
   <div id="products">
       {{#each productsInCart}}
-          <div class="product">
+          <div class="product" product_id="{{this.product._id}}">
             <div>
               <img class="product_image" alt="Photo of the product" />
             </div>
@@ -13,6 +13,9 @@
                 <span class="product_keywords">{{this}}</span>
               {{/each}}
               <p class="product_description">{{this.product.description}}</p>
+            <button class="product_action" onclick="handleProductRemovedFromCart('{{../cartId}}','{{this.product._id}}')">
+              Remove from Cart
+            </button>
             </div>
           </div>
       {{/each}}

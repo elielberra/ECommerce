@@ -4,8 +4,9 @@
   "useTabs": false,
   "semi": true,
   "singleQuote": false,
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "bracketSpacing": true,
   "endOfLine": "lf",
   "printWidth": 100
+  
 }

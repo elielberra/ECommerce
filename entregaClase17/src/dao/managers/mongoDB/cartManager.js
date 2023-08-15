@@ -50,7 +50,7 @@ class CartManager {
     const willReturnLeanObject = false;
     const cart = await this.getCartById(cartId, willReturnLeanObject);
     if (!cart) {
-      throw new ItemNotFoundError(`The product with the id ${productId} not found`);
+      throw new ItemNotFoundError(`The cart with the id ${cartId} was not found`);
     }
     const existingProductIndex = cart.products.findIndex(
       product => product.product?._id?.toString() === productId

@@ -124,7 +124,7 @@
   margin: 10px 0;
 }
 
-.add_to_cart {
+.product_action {
   background-color: #005cbf;
   color: #fff;
   border: none;
@@ -132,7 +132,7 @@
   cursor: pointer;
 }
 
-.add_to_cart button:hover {
+.product_action button:hover {
   background-color: #0077cc;
 }
 

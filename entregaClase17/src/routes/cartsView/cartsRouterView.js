@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
           ...req.user,
           isAdmin: isAdminBoolean
         },
-        jsFilename: "",
+        jsFilename: "productsInCart",
         styleFilename: "products",
         cartId: req.cartId,
         numProductsInCart
