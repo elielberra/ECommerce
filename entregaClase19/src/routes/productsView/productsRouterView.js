@@ -50,13 +50,13 @@ router.get("/", async (req, res) => {
       return;
     }
   }
-  const isAdminBoolean = req.user.role === "admin";
+  const isAdminBoolean = req.session?.user?.role === "admin";
   const { docs: products, ...pageInfo } = await productManager.getPaginatedProducts(
     limit,
     page,
     query,
     sort
-  );   
+  );
   if (page > pageInfo.totalPages) {
     res.status(404).send(`The page ${page} does not exist`);
     return;
@@ -72,20 +72,26 @@ router.get("/", async (req, res) => {
     ? `${pageBaseURL}${limitParamURL}&page=${pageInfo.nextPage}${queryParamURL}${sortParamURL}`
     : "";
   const categories = await productManager.getCategories();
-  const cart = await cartManager.getCartById(req.cartId);
-  const numProductsInCart = cart.products.length;
+  let numProductsInCart = null;
+  console.debug("req.session.user", req.session.user);
+  if (req.session.user) {
+    const cart = await cartManager.getCartById(req.cartId);
+    numProductsInCart = cart?.products.length;
+  }
   res.render("products", {
     products,
-    user: {
-      ...req.user,
-      isAdmin: isAdminBoolean
-    },
+    user: req.session.user
+      ? {
+          ...req.session.user,
+          isAdmin: isAdminBoolean
+        }
+      : null,
     jsFilename: "products",
     styleFilename: "products",
     pageInfo,
     categories,
-    cartId: req.cartId,
-    numProductsInCart,
+    cartId: req.cartId ? req.cartId : null,
+    numProductsInCart: numProductsInCart ? numProductsInCart : null
   });
 });
 

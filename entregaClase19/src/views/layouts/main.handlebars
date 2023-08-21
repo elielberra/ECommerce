@@ -34,12 +34,14 @@
           <li>
             <a href="/products">Products</a>
           </li>
-          <li>
-            <a href="/carts/{{cartId}}">Cart<span id="cart_badge">{{numProductsInCart}}</span></a>
-          </li>
           {{#if user}}
             <li>
-              <a>Welcome, {{user.name}}!</a>
+              <a href="/carts/{{cartId}}">Cart<span id="cart_badge">{{numProductsInCart}}</span></a>
+            </li>
+          {{/if}}
+          {{#if user}}
+            <li>
+              <a>Welcome, {{user.firstname}}!</a>
               <div class="navbar-dropdown">
                 <ul class="navbar-dropdown-list">
                   <li>

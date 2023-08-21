@@ -7,6 +7,7 @@ const ProductsRouterView = require("./productsView/productsRouterView");
 const CartsRouterView = require("./cartsView/cartsRouterView");
 const LoginRouter = require("./login/loginRouter");
 const SignupRouter = require("./signup/signupRouter");
+const LogoutRouter = require("./logout/logoutRouter");
 
 // Router for the home page
 const homeRouter = Router();
@@ -37,6 +38,10 @@ loginRouter.use("/", LoginRouter);
 const signupRouter = Router();
 signupRouter.use("/", SignupRouter);
 
+// Router for signing up
+const logoutRouter = Router();
+logoutRouter.use("/", LogoutRouter);
+
 module.exports = {
   homeRouter,
   apiRouter,
@@ -44,5 +49,6 @@ module.exports = {
   productsRouterView,
   cartsRouterView,
   loginRouter,
-  signupRouter
+  signupRouter,
+  logoutRouter
 };

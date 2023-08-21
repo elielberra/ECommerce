@@ -11,8 +11,9 @@ class UserManager {
     return user;
   }
 
-  async getUserByEmail(email) {
-    const user = await userModel.findOne({ email }).lean();
+  async getUserByEmail(enteredEmail) {
+    const user = await userModel.findOne({ email: enteredEmail }).lean();
+    console.debug("USER", user)
     return user;
   }
 

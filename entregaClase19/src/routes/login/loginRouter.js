@@ -8,28 +8,28 @@ router.get("/", (_, res) =>
   })
 );
 router.post("/", async (req, res) => {
+  console.debug("REQ.BODY", req.body);
   const { email } = req.body;
   try {
     const user = await userManager.getUserByEmail(email);
     if (!user) {
-      return res.render("login", { error: "El usuario no existe" });
+      return res.render("login", {
+        styleFilename: "login-signup",
+        error: "El usuario no existe"
+      });
     }
-    req.session.user = {
-      name: user.firstname,
-      id: user._id,
-
-      // role: 'Admin'
-      ...user
-    };
-    req.session.save((err) => {
-      if (!err) {
-        res.redirect("/");
+    req.session.user = user;
+    req.session.save((error) => {
+      if (!error) {
+        res.redirect("/products");
       }
     });
-  } catch (e) {
-    res.render("login", { error: "Ha ocurrido un error" });
+  } catch (error) {
+    console.error(error);
+    return res.render("login", {
+      error: "There has been an error with the server. Please try again later"
+    });
   }
-  // guardo la session con la informacion del usuario
 });
 
 module.exports = router;
