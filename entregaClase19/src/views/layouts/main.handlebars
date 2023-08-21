@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/css/uikit.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+    {{#if styleFilename}}
+      <link rel="stylesheet" href="/static/css/{{styleFilename}}.css" type="text/css" />
+    {{/if}}
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="navbar-left">
+        <ul class="navbar-list">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/chat">Chat</a>
+          </li>
+          <li>
+            <a href="/products">Products</a>
+          </li>
+          <li>
+            <a href="/carts/{{cartId}}">Cart<span id="cart_badge">{{numProductsInCart}}</span></a>
+          </li>
+          {{#if user}}
+            <li>
+              <a>Welcome, {{user.name}}!</a>
+              <div class="navbar-dropdown">
+                <ul class="navbar-dropdown-list">
+                  <li>
+                    <a href="#">Profile</a>
+                  </li>
+                  {{#if user.isAdmin}}
+                    <li>
+                      <a href="#">Admin</a>
+                    </li>
+                  {{/if}}
+                  <li>
+                    <a href="/logout">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          {{else}}
+            <li>
+              <a href="/login">Login</a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </nav>
+    {{{body}}}
+    <script src="/socket.io/socket.io.js"></script>
+    {{#if loadSweetAlert}}
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    {{/if}}
+    {{#if jsFilename}}
+      <script src="/static/js/{{jsFilename}}.js" defer></script>
+    {{/if}}
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.11.1/dist/js/uikit-icons.min.js"></script>
+  </body>
+</html>

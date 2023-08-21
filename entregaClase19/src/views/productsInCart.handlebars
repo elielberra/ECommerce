@@ -1,0 +1,23 @@
+<div id="page_container">
+  <div id="products">
+      {{#each productsInCart}}
+          <div class="product" product_id="{{this.product._id}}">
+            <div>
+              <img class="product_image" alt="Photo of the product" />
+            </div>
+            <div>
+              <p class="product_title">{{this.product.title}}</p>
+              <p class="product_price">u$D {{this.product.price}}</h5>
+              <p class="product_category">{{this.product.category}}</p>
+              {{#each this.product.keywords}}
+                <span class="product_keywords">{{this}}</span>
+              {{/each}}
+              <p class="product_description">{{this.product.description}}</p>
+            <button class="product_action remove" onclick="handleProductRemovedFromCart('{{../cartId}}','{{this.product._id}}')">
+              Remove
+            </button>
+            </div>
+          </div>
+      {{/each}}
+  </div>
+</div>

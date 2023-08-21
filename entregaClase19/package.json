@@ -1,0 +1,39 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Web App for buting products and using a chatroom",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "cross-env DB_ENVIRONMENT=atlas nodemon ./src/server.js",
+    "start:verbose": "cross-env DB_ENVIRONMENT=atlas VERBOSE=true nodemon ./src/server.js",
+    "start:local": "cross-env DB_ENVIRONMENT=local nodemon ./src/server.js",
+    "start:local:verbose": "cross-env DB_ENVIRONMENT=local VERBOSE=true nodemon ./src/server.js",
+    "seed": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/seedProducts.js",
+    "seed:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/seedProducts.js",
+    "delete:products": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/deleteCollection.js products",
+    "delete:products:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js products",
+    "delete:chatmessages": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/deleteCollection.js chatmessages",
+    "delete:chatmessages:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js chatmessages",
+    "delete:carts": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/deleteCollection.js carts",
+    "delete:carts:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js carts"
+  },
+  "author": "Eliel Berra",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^5.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.4.1",
+    "mongoose-paginate-v2": "^1.7.31",
+    "socket.io": "^4.7.1",
+    "sweetalert2": "^11.7.20"
+  },
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.0.1"
+  }
+}

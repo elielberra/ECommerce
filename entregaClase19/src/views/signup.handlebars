@@ -1,0 +1,84 @@
+<div id="signup_section">
+  <h3 class="title">Enter your information</h3>
+  <form action="" method="post">
+    <div class="data_input">
+      <input
+        class=""
+        name="firstname"
+        type="text"
+        placeholder="Name"
+        aria-label="Name input"
+        required
+      />
+    </div>
+    <div class="data_input">
+      <input
+        name="lastname"
+        class=""
+        type="text"
+        placeholder="Lastname"
+        aria-label="Lastname input"
+        required
+      />
+    </div>
+    <div class="data_input">
+      <input
+        name="email"
+        class=""
+        type="text"
+        placeholder="Email"
+        aria-label="Email input"
+        required
+      />
+    </div>
+    <div class="data_input">
+      <input
+        name="age"
+        class=""
+        type="number"
+        min="0"
+        step="1"
+        placeholder="Age"
+        aria-label="Age input"
+        required
+      />
+    </div>
+    <div class="data_input">
+      <label>Gender</label>
+      <select name="gender" class="" aria-label="Gender selection" required>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+    </div>
+    <div class="data_input">
+      <input
+        name="password"
+        class=""
+        type="password"
+        placeholder="Password"
+        aria-label="Password input"
+        required
+      />
+    </div>
+    <div class="data_input">
+      <input
+        name="passwordRepeated"
+        class=""
+        type="password"
+        placeholder="Enter your password again"
+        aria-label="Re enter password input"
+        required
+      />
+    </div>
+    {{#if error}}
+      <div class="error">
+        <span>{{error}}</span>
+      </div>
+    {{/if}}
+    <button class="">Register</button>
+  </form>
+
+  <div class="redirect_section">
+    <span>Already registered? <a href="/login">Login!</a></span>
+  </div>
+</div>
