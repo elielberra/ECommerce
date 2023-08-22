@@ -1,7 +1,4 @@
 <div id="page_container">
-  <div id="welcome_section">
-    <p></p>
-  </div>
   <div id="filters">
     <h3>Filters</h3>
     <label>Category
@@ -34,7 +31,9 @@
               <span class="product_keywords">{{this}}</span>
             {{/each}}
             <p class="product_description">{{this.description}}</p>
-            <button class="product_action add" onclick="handleProductAddedToCart('{{../cartId}}','{{this._id}}')">Add to Cart{{cartId}}</button>
+            {{#if ../user}}
+              <button class="product_action add" onclick="handleProductAddedToCart('{{../user.cart}}','{{this._id}}')">Add to Cart</button>
+            {{/if}}
           </div>
         </div>
     {{/each}}

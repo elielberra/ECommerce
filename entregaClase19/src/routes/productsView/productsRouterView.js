@@ -73,9 +73,8 @@ router.get("/", async (req, res) => {
     : "";
   const categories = await productManager.getCategories();
   let numProductsInCart = null;
-  console.debug("req.session.user", req.session.user);
   if (req.session.user) {
-    const cart = await cartManager.getCartById(req.cartId);
+    const cart = await cartManager.getCartById(req.session.user.cart);
     numProductsInCart = cart?.products.length;
   }
   res.render("products", {
@@ -90,8 +89,7 @@ router.get("/", async (req, res) => {
     styleFilename: "products",
     pageInfo,
     categories,
-    cartId: req.cartId ? req.cartId : null,
-    numProductsInCart: numProductsInCart ? numProductsInCart : null
+    numProductsInCart: numProductsInCart ? numProductsInCart : 0
   });
 });
 

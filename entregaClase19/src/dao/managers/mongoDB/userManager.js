@@ -1,4 +1,5 @@
 const userModel = require("../../models/userModel");
+const cartManager = require("../../managers/mongoDB/cartManager");
 
 class UserManager {
   async getUsers() {
@@ -13,13 +14,19 @@ class UserManager {
 
   async getUserByEmail(enteredEmail) {
     const user = await userModel.findOne({ email: enteredEmail }).lean();
-    console.debug("USER", user)
+    console.debug("USER", user);
     return user;
   }
 
   async createUser(user) {
-    const newUser = userModel.create(user);
-    return newUser;
+    const newUser = await userModel.create(user);
+    console.debug("newUser", newUser);
+    const newCart = await cartManager.addCart({ user: newUser._id });
+    console.debug("newCart", newCart);
+    await userModel.updateOne({ _id: newUser._id }, { $set: { cart: newCart._id } });
+    const newUserWithCart = userModel.findOne({ _id: newUser._id });
+    console.debug("newUserWithCart", newUserWithCart)
+    return newUserWithCart;
   }
 
   async updateUser(id, user) {

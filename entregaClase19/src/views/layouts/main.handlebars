@@ -36,7 +36,7 @@
           </li>
           {{#if user}}
             <li>
-              <a href="/carts/{{cartId}}">Cart<span id="cart_badge">{{numProductsInCart}}</span></a>
+              <a href="/carts/{{user.cart}}">Cart<span id="cart_badge">{{numProductsInCart}}</span></a>
             </li>
           {{/if}}
           {{#if user}}

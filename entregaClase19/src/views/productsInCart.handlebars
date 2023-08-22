@@ -13,7 +13,7 @@
                 <span class="product_keywords">{{this}}</span>
               {{/each}}
               <p class="product_description">{{this.product.description}}</p>
-            <button class="product_action remove" onclick="handleProductRemovedFromCart('{{../cartId}}','{{this.product._id}}')">
+            <button class="product_action remove" onclick="handleProductRemovedFromCart('{{../user.cart}}','{{this.product._id}}')">
               Remove
             </button>
             </div>

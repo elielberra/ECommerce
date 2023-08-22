@@ -27,8 +27,6 @@ router.post("/", async (req, res) => {
     req.session.user = {
       ...newUser._doc
     };
-    console.log("REQ.SESSIONS", req.session)
-    // console.log(req.session);
     req.session.save((err) => {
       res.redirect("/products");
     });

@@ -1,0 +1,13 @@
+Remove console.log/debug
+
+Add email regex validation
+
+Add websocket for checking if the user already exists on signup
+
+Add asterisk for required fields
+
+Display quantity of a product on the Cart
+
+Use mongodb operations on DAO instead of mongoose .save logic
+
+Add README

@@ -13,19 +13,20 @@ router.get("/:id", async (req, res) => {
   try {
     const cart = await cartManager.getCartById(id, true);
     if (cart) {
-      const isAdminBoolean = req.user.role === "admin";
+      const isAdminBoolean = req.session?.user?.role === "admin";
       const productsInCart = cart.products;
-      const numProductsInCart = cart.products.length;
+      const numProductsInCart = cart.products?.length;
       res.render("productsInCart", {
-        productsInCart,
-        user: {
-          ...req.user,
-          isAdmin: isAdminBoolean
-        },
+        user: req.session.user
+          ? {
+              ...req.session.user,
+              isAdmin: isAdminBoolean
+            }
+          : null,
         jsFilename: "productsInCart",
         styleFilename: "products",
-        cartId: req.cartId,
-        numProductsInCart
+        productsInCart,
+        numProductsInCart: numProductsInCart ? numProductsInCart : 0
       });
     } else {
       res.status(404).send(`The cart with the ID ${id} was not found`);
