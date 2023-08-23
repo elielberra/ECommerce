@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
       return;
     }
   }
-  const isAdminBoolean = req.session?.user?.role === "admin";
+  const isAdminBoolean = req.session?.user?.role === "Admin";
   const { docs: products, ...pageInfo } = await productManager.getPaginatedProducts(
     limit,
     page,

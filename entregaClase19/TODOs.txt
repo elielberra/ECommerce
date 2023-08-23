@@ -1,3 +1,5 @@
+Add adminCoder role and set other roles to "user"
+
 Remove console.log/debug
 
 Add email regex validation
