@@ -21,12 +21,9 @@ async function socketHandler(socket) {
   });
 
   socket.on("product-added-to-cart", async ({ cartId, productId }) => {
-    console.debug("ids", cartId, productId)
     await cartManager.addProductToCart(cartId, productId);
     const cart = await cartManager.getCartById(cartId);
-    console.debug("cart", cart)
     const numProductsInCart = cart.products.length;
-    console.debug("numProductsInCart", numProductsInCart)
     socket.emit("update-cart-badge", numProductsInCart);
   });
 

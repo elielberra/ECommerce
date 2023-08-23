@@ -2,7 +2,6 @@ const { Router } = require("express");
 
 const router = Router();
 router.get("/", (req, res) => {
-  console.debug(req.session);
   res.render("logout", {
     styleFilename: "logout",
     userFirstName: req.session.user.firstname

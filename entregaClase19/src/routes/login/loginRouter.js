@@ -8,14 +8,13 @@ router.get("/", (_, res) =>
   })
 );
 router.post("/", async (req, res) => {
-  console.debug("REQ.BODY", req.body);
   const { email } = req.body;
   try {
     const user = await userManager.getUserByEmail(email);
     if (!user) {
       return res.render("login", {
         styleFilename: "login-signup",
-        error: "El usuario no existe"
+        error: "The user does not exist"
       });
     }
     req.session.user = user;

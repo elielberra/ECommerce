@@ -15,7 +15,9 @@
     "delete:chatmessages": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/deleteCollection.js chatmessages",
     "delete:chatmessages:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js chatmessages",
     "delete:carts": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/deleteCollection.js carts",
-    "delete:carts:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js carts"
+    "delete:carts:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/deleteCollection.js carts",
+    "addAdmin": "cross-env DB_ENVIRONMENT=atlas node ./src/scripts/addAdminUser.js",
+    "addAdmin:local": "cross-env DB_ENVIRONMENT=local node ./src/scripts/addAdminUser.js"
   },
   "author": "Eliel Berra",
   "license": "ISC",

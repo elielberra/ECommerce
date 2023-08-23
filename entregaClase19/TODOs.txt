@@ -1,4 +1,6 @@
-Add adminCoder role and set other roles to "user"
+Add secrets to .env
+
+Shorthand .env instead of process.env
 
 Remove console.log/debug
 
