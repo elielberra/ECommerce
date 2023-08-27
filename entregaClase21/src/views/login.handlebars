@@ -1,0 +1,21 @@
+<div id="login_section">
+  <h3 class="title">Login</h3>
+  <form action="" method="post">
+    <div class="data_input">
+      <input name="email" type="text" placeholder="Email" aria-label="Email input" />
+    </div>
+    <div class="data_input">
+      <input name="password" type="password" placeholder="Password" aria-label="Password input" />
+    </div>
+    <button class="">Login</button>
+    {{#if error}}
+      <div class="error">
+        <span>{{error}}</span>
+      </div>
+    {{/if}}
+  </form>
+
+  <div class="redirect_section">
+    <span>New customer? <a href="/signup">Start here!</a></span>
+  </div>
+</div>
