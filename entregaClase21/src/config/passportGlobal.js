@@ -1,7 +1,10 @@
 const passport = require("passport");
 const localPassport = require("passport-local");
+const GithubStrategy = require("passport-github2");
 const userManager = require("../dao/managers/mongoDB/userManager");
 const { localSignup, localLogin } = require("./localPassportConfig");
+const githubAuthentication = require("./githubPassportConfig");
+const env = process.env;
 
 const LocalStrategy = localPassport.Strategy;
 
@@ -11,8 +14,20 @@ const initializePassport = () => {
     new LocalStrategy({ usernameField: "email", passReqToCallback: true }, localSignup)
   );
   passport.use("local-login", new LocalStrategy({ usernameField: "email" }, localLogin));
+
+  passport.use(
+    "github",
+    new GithubStrategy(
+      {
+        clientID: env.GITHUB_CLIENT_ID,
+        clientSecret: env.GITHUB_CLIENT_SECRET,
+        callbackUrl: env.GITHUB_CALLBACK_URL
+      },
+      githubAuthentication
+    )
+  );
+
   passport.serializeUser((user, done) => {
-    console.debug("SERIALIZING USER:", user);
     done(null, user._id);
   });
   passport.deserializeUser(async (id, done) => {

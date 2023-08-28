@@ -4,7 +4,7 @@ const router = Router();
 router.get("/", (req, res) => {
   res.render("logout", {
     styleFilename: "logout",
-    userFirstName: req.user.firstname
+    userFirstName: req.user?.firstname
   });
   req.session.destroy((error) => {
     if (error) {

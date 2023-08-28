@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const userManager = require("../dao/managers/mongoDB/userManager");
-const { connectToDatabase } = require("../utils");
+const { connectToDatabase, hashPassword } = require("../utils");
 
 async function addAdminUser() {
   connectToDatabase();
@@ -9,7 +9,7 @@ async function addAdminUser() {
     firstname: "Coder",
     lastname: "Admin",
     email: "adminCoder@coder.com",
-    password: "adminCod3r123",
+    password: hashPassword("adminCod3r123"),
     role: "Admin",
     gender: "Male",
     age: 30

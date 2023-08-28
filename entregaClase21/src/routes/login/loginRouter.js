@@ -7,9 +7,30 @@ router.get("/", (_, res) =>
     styleFilename: "login-signup"
   })
 );
-router.post("/", passport.authenticate("local-login", {
-  successRedirect: "/products",
-  failureRedirect: "/login"
-}));
+router.post(
+  "/",
+  passport.authenticate("local-login", {
+    successRedirect: "/products",
+    failureRedirect: "/login"
+  })
+);
 
+router.get(
+  "/github",
+  passport.authenticate("github", {
+    successRedirect: "/products",
+    failureRedirect: "/login"
+  }),
+  async (req, res) => {
+    console.log("INSIDE GITHUB INTIAL AUTHENTICATION");
+  }
+);
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    successRedirect: "/products",
+    failureRedirect: "/login"
+  })
+);
 module.exports = router;

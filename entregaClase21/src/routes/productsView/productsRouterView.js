@@ -76,11 +76,7 @@ router.get("/", async (req, res) => {
   if (req.user) {
     const cart = await cartManager.getCartById(req.user.cart);
     numProductsInCart = cart?.products.length;
-    console.debug("numProductsInCart", numProductsInCart)
   }
-  console.debug("REQ.USER", req.user)
-  console.debug("REQ.USER.CART", req.user.cart)
-  console.debug("TYPE OF REQ.USER", typeof req.user)
   res.render("products", {
     products,
     user: req.user
