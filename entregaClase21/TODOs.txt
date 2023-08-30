@@ -1,4 +1,6 @@
-Add secrets to .env
+Make user model have unique and lowercase set to true, and use validator dependency for email
+
+Add mongoose validations (set the 2nd argument of the array as the error message)
 
 Shorthand .env instead of process.env
 
